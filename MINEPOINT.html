@@ -1,0 +1,2605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#030608">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>MINEPOINT — Play • Mine • Earn</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Playfair+Display:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;min-height:100vh;overscroll-behavior:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+:root{
+  --bg1:#0a1e33;--bg2:#05101f;--bg-base:#020814;--bg-base2:#01060f;
+  --panel1:#0a1624;--panel2:#061020;--panel3:#040b18;
+  --panel-solid:#071426;--panel-input:#0a1a2e;
+  --green:#00d4ff;--green2:#0099cc;--green-dim:#082238;--green-glow:rgba(0,212,255,.4);
+  --text:#e8f7ff;--text2:#b3e8ff;--muted:#5a7d94;--muted2:#4a6577;
+  --border:rgba(0,212,255,.2);--border-strong:#0088aa;
+  --gold:#ffd76a;--red:#ff5a7a;--purple:#d46bff;
+  --ton:#0098EA;--telegram:#2AABEE;--tiktok:#FE2C55;--youtube:#FF0000;
+  --font-display:'Orbitron',sans-serif;--font-body:'Rajdhani',sans-serif;
+  --fs-title:22px;--fs-section:15px;--fs-body:14px;--fs-small:12px;--fs-tiny:10px;
+  --fw-display:700;--ls-title:1px;--ls-label:2px;
+  --radius-card:14px;--radius-btn:8px;--radius-pill:6px;--radius-input:6px;--radius-badge:6px;
+  --gap:14px;
+  --shadow-card:0 20px 60px -20px #000,0 6px 18px #00d4ff08,inset 0 1px 0 #00d4ff12;
+  --shadow-btn:0 6px 20px #0008,0 0 20px #00d4ff18;
+  --blur-ambient:80px;
+}
+
+body.theme-ton{
+  --bg1:#001F33;--bg2:#00111F;--bg-base:#000A14;--bg-base2:#00050C;
+  --panel1:#001A2E;--panel2:#000F1E;--panel3:#000814;
+  --panel-solid:#001524;--panel-input:#002238;
+  --green:#33AAFF;--green2:#0098EA;--green-dim:#002440;--green-glow:rgba(0,152,234,.45);
+  --text:#E8F4FF;--text2:#B3DBFF;--muted:#4A7A9E;--muted2:#3A5F7C;
+  --border:rgba(0,152,234,.25);--border-strong:#0088CC;
+  --gold:#FFD76A;--red:#FF5A7A;--purple:#D46BFF;
+  --font-display:'Orbitron',sans-serif;--font-body:'Rajdhani',sans-serif;
+  --shadow-card:0 20px 60px -20px #000,0 6px 18px #0098EA20,0 0 60px #0098EA18;
+  --shadow-btn:0 6px 20px #0008,0 0 24px #0098EA30;
+}
+
+body.theme-galaxy{
+  --bg1:#1a0a3a;--bg2:#0a0420;--bg-base:#050110;--bg-base2:#020008;
+  --panel1:#14082a;--panel2:#0a0418;--panel3:#060210;
+  --panel-solid:#100620;--panel-input:#180a30;
+  --green:#00e5ff;--green2:#7c5cff;--green-dim:#0a0a30;--green-glow:rgba(124,92,255,.5);
+  --text:#e8e0ff;--text2:#b3a3ff;--muted:#6a5a8a;--muted2:#504075;
+  --border:rgba(124,92,255,.25);--border-strong:#5a3aaa;
+  --gold:#ffd76a;--red:#ff5a9a;
+  --font-display:'Orbitron',sans-serif;--font-body:'Rajdhani',sans-serif;
+  --shadow-card:0 20px 60px -20px #000,0 6px 18px #7c5cff20,0 0 60px #7c5cff14;
+  --shadow-btn:0 6px 20px #0008,0 0 24px #7c5cff30;
+}
+
+body.theme-gold{
+  --bg1:#2a1e0a;--bg2:#120d04;--bg-base:#0a0804;--bg-base2:#050402;
+  --panel1:#1a1408;--panel2:#0e0a04;--panel3:#080603;
+  --panel-solid:#141008;--panel-input:#1a1408;
+  --green:#ffc84b;--green2:#c9982a;--green-dim:#2a1e08;--green-glow:rgba(255,200,75,.4);
+  --text:#fff8e8;--text2:#ffe9b3;--muted:#a08a5a;--muted2:#8a7548;
+  --border:rgba(255,200,75,.22);--border-strong:#a88020;
+  --gold:#ffd76a;--red:#ff6d78;
+  --font-display:'Playfair Display',serif;--font-body:'Inter',serif;
+  --shadow-card:0 20px 60px -20px #000,0 8px 24px #0008,inset 0 1px 0 #ffc84b22;
+  --shadow-btn:0 6px 20px #0008,0 0 20px #ffc84b22;
+}
+
+body.theme-emerald{
+  --bg1:#0a3a2a;--bg2:#042018;--bg-base:#01100a;--bg-base2:#000805;
+  --panel1:#082a20;--panel2:#041814;--panel3:#020f0a;
+  --panel-solid:#062018;--panel-input:#0a2e22;
+  --green:#00ff9d;--green2:#00c474;--green-dim:#052e1e;--green-glow:rgba(0,255,157,.4);
+  --text:#e8fff5;--text2:#a3ffd6;--muted:#4a8a70;--muted2:#3a6b58;
+  --border:rgba(0,255,157,.22);--border-strong:#00a060;
+  --gold:#ffd76a;--red:#ff5a7a;
+  --font-display:'Rajdhani',sans-serif;--font-body:'Rajdhani',sans-serif;
+  --shadow-card:0 20px 60px -20px #000,0 6px 18px #00ff9d08,inset 0 1px 0 #00ff9d14;
+  --shadow-btn:0 6px 20px #0008,0 0 24px #00ff9d22;
+}
+
+body.theme-crimson{
+  --bg1:#3a0a15;--bg2:#200610;--bg-base:#100005;--bg-base2:#080002;
+  --panel1:#2a0812;--panel2:#180410;--panel3:#0f0208;
+  --panel-solid:#200610;--panel-input:#2e0a16;
+  --green:#ff3b5c;--green2:#cc1f3d;--green-dim:#2a0812;--green-glow:rgba(255,59,92,.45);
+  --text:#ffe8ed;--text2:#ffb3c2;--muted:#8a4a58;--muted2:#6a3542;
+  --border:rgba(255,59,92,.22);--border-strong:#aa2038;
+  --gold:#ffb347;--red:#ff3b5c;
+  --font-display:'Playfair Display',serif;--font-body:'Inter',serif;
+  --shadow-card:0 20px 60px -20px #000,0 8px 24px #0008,0 0 40px #ff3b5c14,inset 0 1px 0 #ff3b5c22;
+  --shadow-btn:0 6px 20px #0008,0 0 24px #ff3b5c2a;
+}
+
+body{
+  padding:clamp(12px,3.2vw,22px) clamp(10px,2.8vw,18px) 118px;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%,var(--bg1) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 100%,var(--bg2) 0%,transparent 65%),
+    linear-gradient(180deg,var(--bg-base) 0%,var(--bg-base2) 100%);
+  background-attachment:fixed;
+  color:var(--text);font-family:var(--font-body);font-size:var(--fs-body);
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;overflow-x:hidden;
+  transition:background .5s ease,color .3s ease;
+  line-height:1.5;
+}
+body::before,body::after{
+  content:"";position:fixed;border-radius:50%;
+  filter:blur(var(--blur-ambient));pointer-events:none;z-index:0;
+  animation:floatAmbient 22s ease-in-out infinite;transition:background .5s;
+  will-change:transform;
+}
+body::before{top:-15%;left:-10%;width:min(420px,60vw);height:min(420px,60vw);background:radial-gradient(circle,var(--green-dim),transparent 70%)}
+body::after{bottom:-20%;right:-10%;width:min(380px,55vw);height:min(380px,55vw);background:radial-gradient(circle,var(--green-glow),transparent 70%);opacity:.35;animation-delay:-11s}
+@keyframes floatAmbient{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-20px) scale(1.08)}
+  66%{transform:translate(-20px,25px) scale(.95)}
+}
+.app{width:100%;max-width:440px;margin:auto;position:relative;z-index:1}
+
+.icon{display:inline-block;width:1em;height:1em;vertical-align:-.125em;flex-shrink:0;transition:transform .3s,color .3s}
+.icon-xs{width:.85em;height:.85em}
+.icon-sm{width:1.1em;height:1.1em}
+.icon-md{width:1.35em;height:1.35em}
+.icon-lg{width:1.75em;height:1.75em}
+.icon-xl{width:2.2em;height:2.2em}
+.icon-2xl{width:2.6em;height:2.6em}
+
+.header{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:14px;padding:11px 15px;
+  border:1px solid var(--border);border-radius:var(--radius-card);
+  background:linear-gradient(145deg,var(--panel1),var(--panel2));
+  box-shadow:inset 0 1px 0 #ffffff05,0 6px 20px #0008;
+  position:relative;overflow:hidden;
+}
+.header::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 30%,var(--green-glow) 50%,transparent 70%);
+  background-size:220% 100%;opacity:.12;
+  animation:shine 5s linear infinite;pointer-events:none;
+}
+@keyframes shine{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;position:relative}
+.brand-icon{
+  width:38px;height:38px;display:grid;place-items:center;
+  border-radius:var(--radius-badge);
+  background:linear-gradient(145deg,var(--green-dim),var(--panel2));
+  border:1px solid var(--border-strong);flex-shrink:0;color:var(--green);
+}
+.brand-icon .icon{filter:drop-shadow(0 0 6px var(--green-glow))}
+.brand-name{font-family:var(--font-display);font-size:13px;font-weight:var(--fw-display);letter-spacing:var(--ls-label);line-height:1.1}
+.brand-sub{font-size:9px;color:var(--muted);letter-spacing:1.5px;margin-top:3px;font-weight:600;display:flex;align-items:center;gap:4px}
+.mpe-badge{
+  display:inline-block;
+  padding:1px 5px;border-radius:4px;
+  background:rgba(0,152,234,.15);
+  border:1px solid #0098EA;
+  color:#33AAFF;
+  font-size:8px;font-weight:900;
+  letter-spacing:.5px;
+}
+
+.header-status{
+  display:flex;align-items:center;gap:6px;padding:6px 11px;
+  border-radius:var(--radius-pill);background:var(--green-dim);
+  border:1px solid var(--border-strong);
+  font-size:10px;color:var(--green);font-weight:700;
+  letter-spacing:.5px;flex-shrink:0;
+}
+.header-status .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 8px var(--green);
+  animation:pulseDot 1.6s infinite;
+}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+
+.page{display:none;animation:fadeUp .4s cubic-bezier(.22,1,.36,1)}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page-title{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--font-display);font-size:var(--fs-title);
+  font-weight:var(--fw-display);margin:0 0 5px;letter-spacing:var(--ls-title);
+  line-height:1.15;
+}
+.page-title .icon{color:var(--green);filter:drop-shadow(0 0 8px var(--green-glow))}
+.page-intro{font-size:var(--fs-small);color:var(--muted);margin:0 0 18px;line-height:1.6}
+
+.balance-strip{display:flex;gap:10px;margin-bottom:14px}
+.balance-strip-item{
+  flex:1;padding:11px 13px;
+  border:1px solid var(--border);border-radius:14px;
+  background:linear-gradient(145deg,var(--panel1),var(--panel2));
+  position:relative;overflow:hidden;
+}
+.balance-strip-item.pts{
+  border-color:var(--green2);
+  background:linear-gradient(145deg,var(--green-dim),var(--panel2));
+}
+.balance-strip-item.ton{
+  border-color:#0098EA;
+  background:linear-gradient(145deg,#001F33,#00111F);
+}
+.balance-strip-item .mini-label{
+  display:flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:700;letter-spacing:1.2px;
+  color:var(--muted);margin-bottom:6px;text-transform:uppercase;
+}
+.balance-strip-item.pts .mini-label{color:var(--green)}
+.balance-strip-item.ton .mini-label{color:#33AAFF}
+.balance-strip-item .mini-value{
+  font-family:var(--font-display);
+  font-size:clamp(16px,4.5vw,20px);
+  font-weight:900;letter-spacing:-.5px;
+  font-variant-numeric:tabular-nums;line-height:1.1;
+}
+.balance-strip-item.pts .mini-value{color:var(--green);text-shadow:0 0 12px var(--green-glow)}
+.balance-strip-item.ton .mini-value{color:#33AAFF;text-shadow:0 0 12px rgba(0,152,234,.4)}
+.balance-strip-item .mini-sub{font-size:9px;color:var(--muted2);margin-top:4px}
+
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:var(--gap)}
+.summary-card{
+  padding:14px 13px;border:1px solid var(--border);
+  border-radius:var(--radius-card);
+  background:linear-gradient(145deg,var(--panel1),var(--panel2));
+  position:relative;overflow:hidden;
+}
+.summary-card.player{grid-column:1/-1;display:flex;align-items:center;gap:13px;padding:16px 15px}
+.summary-card.player::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 40%,var(--green-glow) 50%,transparent 60%);
+  background-size:220% 100%;opacity:.08;
+  animation:shine 6s linear infinite;pointer-events:none;
+}
+.avatar{
+  width:56px;height:56px;border-radius:50%;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--green-dim),var(--panel2));
+  border:2px solid var(--green);flex-shrink:0;
+  box-shadow:0 0 20px var(--green-glow);
+  position:relative;z-index:1;color:var(--green);
+}
+.avatar .icon{width:26px;height:26px;filter:drop-shadow(0 0 8px var(--green-glow))}
+.avatar::after{
+  content:"";position:absolute;inset:-4px;border-radius:50%;
+  border:1px dashed var(--green);opacity:.4;
+  animation:spinSlow 22s linear infinite;
+}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+.player-info{flex:1;min-width:0;position:relative;z-index:1}
+.player-name{font-weight:800;font-size:var(--fs-body);line-height:1.2;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.player-level{font-size:var(--fs-tiny);color:var(--gold);margin:5px 0 7px;font-weight:700;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
+.xp-bar{height:5px;background:var(--panel-solid);border-radius:20px;overflow:hidden;position:relative}
+.xp-bar span{
+  display:block;height:100%;width:0%;
+  background:linear-gradient(90deg,var(--green2),var(--green));
+  border-radius:20px;transition:width .6s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 8px var(--green-glow);
+}
+.xp-text{font-size:var(--fs-tiny);color:var(--muted);margin-top:5px}
+.stat-mini{text-align:center}
+.stat-mini .label{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+  font-size:var(--fs-tiny);color:var(--muted);
+  font-weight:600;letter-spacing:var(--ls-label);margin-bottom:8px;
+}
+.stat-mini .value{
+  font-family:var(--font-display);font-size:clamp(18px,5vw,22px);
+  font-weight:var(--fw-display);letter-spacing:-.5px;
+  font-variant-numeric:tabular-nums;overflow-wrap:anywhere;line-height:1.1;
+}
+.stat-mini .value.reward{color:var(--green);text-shadow:0 0 12px var(--green-glow)}
+.stat-mini .sub{font-size:9px;color:var(--muted2);margin-top:5px}
+.value.bump{animation:bumpValue .65s cubic-bezier(.22,1.5,.36,1)}
+@keyframes bumpValue{0%{transform:scale(1)}30%{transform:scale(1.18)}100%{transform:scale(1)}}
+
+.card{
+  position:relative;overflow:hidden;
+  padding:clamp(18px,4.5vw,22px) clamp(14px,4vw,18px);
+  border:1px solid var(--border);border-radius:var(--radius-card);
+  background:linear-gradient(155deg,var(--panel1) 0%,var(--panel2) 60%,var(--panel3) 100%);
+  box-shadow:var(--shadow-card);margin-bottom:var(--gap);
+}
+.card::before{
+  content:"";position:absolute;top:-60px;right:-60px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,var(--green-glow),transparent 60%);
+  filter:blur(20px);pointer-events:none;opacity:.4;
+}
+.card:last-child{margin-bottom:0}
+.section-title{
+  position:relative;font-family:var(--font-display);
+  font-size:var(--fs-section);font-weight:var(--fw-display);
+  color:var(--text);margin:0 0 4px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.3px;
+  line-height:1.25;
+}
+.section-title .icon{color:var(--green)}
+.section-sub{position:relative;font-size:var(--fs-small);color:var(--muted);margin:0 0 15px;line-height:1.55}
+
+.mega-button{
+  position:relative;width:100%;
+  padding:clamp(20px,5vw,26px) clamp(16px,4.5vw,22px);
+  border-radius:clamp(20px,5vw,26px);
+  border:2px solid var(--green2);
+  background:linear-gradient(145deg,var(--green-dim),var(--panel2));
+  color:#fff;font-family:inherit;cursor:pointer;
+  transition:all .4s cubic-bezier(.22,1,.36,1);
+  overflow:hidden;
+  box-shadow:var(--shadow-btn),0 0 30px var(--green-glow);
+  text-align:left;display:block;
+  animation:fadeUp .4s cubic-bezier(.22,1,.36,1);
+}
+.mega-button::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,var(--green-glow),transparent 50%),
+    radial-gradient(circle at 80% 80%,var(--green-glow),transparent 50%);
+  opacity:.4;pointer-events:none;transition:opacity .4s;
+}
+.mega-button.state-ready{
+  border-color:var(--green2);
+  background:linear-gradient(145deg,var(--green2),var(--green-dim));
+  box-shadow:var(--shadow-btn),0 0 40px var(--green-glow);
+  animation:pulseReady 2.4s ease-in-out infinite,fadeUp .4s cubic-bezier(.22,1,.36,1);
+}
+@keyframes pulseReady{
+  0%,100%{box-shadow:var(--shadow-btn),0 0 30px var(--green-glow)}
+  50%{box-shadow:var(--shadow-btn),0 0 65px var(--green-glow)}
+}
+.mega-button.state-mining{
+  border-color:var(--border-strong);
+  background:linear-gradient(145deg,var(--green-dim),var(--panel2));
+  cursor:default;box-shadow:var(--shadow-btn);
+}
+.mega-button.state-mining::before{
+  background:repeating-linear-gradient(115deg,transparent 0px,transparent 20px,var(--green-glow) 20px,var(--green-glow) 22px);
+  opacity:.15;animation:miningStripes 2s linear infinite;
+}
+@keyframes miningStripes{0%{background-position:0 0}100%{background-position:44px 0}}
+.mega-button.state-claim{
+  border-color:var(--green);
+  background:linear-gradient(145deg,var(--green),var(--green2));
+  color:#001A2E;
+  box-shadow:var(--shadow-btn),0 0 50px var(--green-glow);
+  animation:glowClaim 1.6s ease-in-out infinite alternate,fadeUp .4s cubic-bezier(.22,1,.36,1);
+  cursor:pointer;
+}
+.mega-button.state-claim::before{opacity:.6}
+.mega-button.state-claim .mega-btn-title,
+.mega-button.state-claim .mega-btn-sub,
+.mega-button.state-claim .mega-btn-timer,
+.mega-button.state-claim .mega-btn-timer-label,
+.mega-button.state-claim .mega-btn-progress-label,
+.mega-button.state-claim .mega-btn-progress-val,
+.mega-button.state-claim .mega-btn-bottom{color:#001A2E;text-shadow:none}
+.mega-button.state-claim .mega-progress{background:rgba(0,26,46,.2)}
+.mega-button.state-claim .mega-progress span{background:linear-gradient(90deg,#001A2E,#005580)}
+.mega-button.state-claim .mega-icon{background:#001A2E;border-color:#001A2E;color:#8FD4FF}
+.mega-button.state-claim .mega-icon::after{background:#005580}
+.mega-button.state-claim .mini-dot{background:#001A2E;box-shadow:none}
+.mega-button.state-claim .buff-badge{background:rgba(0,26,46,.15);border-color:#001A2E;color:#001A2E;animation:none}
+@keyframes glowClaim{
+  from{box-shadow:var(--shadow-btn),0 0 30px var(--green-glow)}
+  to{box-shadow:var(--shadow-btn),0 0 75px var(--green-glow)}
+}
+.mega-button:active:not(.state-mining){transform:scale(.985)}
+.mega-btn-head{position:relative;display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.mega-icon{
+  width:62px;height:62px;flex-shrink:0;
+  border-radius:50%;display:grid;place-items:center;
+  background:var(--panel-solid);border:2px solid var(--green2);
+  transition:all .3s;position:relative;color:var(--green);
+}
+.mega-icon .icon{width:30px;height:30px}
+.mega-icon::after{
+  content:"";position:absolute;inset:-6px;border-radius:50%;
+  border:1px dashed var(--green2);opacity:.3;
+  animation:spinSlow 18s linear infinite;
+}
+.mega-button.state-ready .mega-icon{animation:idleBob 2.4s ease-in-out infinite}
+.mega-button.state-mining .mega-icon{
+  animation:swingBig 1.6s ease-in-out infinite;
+  transform-origin:50% 80%;
+  border-color:var(--green);box-shadow:0 0 22px var(--green-glow);
+}
+.mega-button.state-claim .mega-icon{animation:celebrate .9s ease-in-out infinite}
+@keyframes idleBob{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-3px)}}
+@keyframes swingBig{0%,100%{transform:rotate(-16deg) translateY(0)}50%{transform:rotate(16deg) translateY(-4px)}}
+@keyframes celebrate{0%,100%{transform:scale(1) rotate(-8deg)}50%{transform:scale(1.14) rotate(8deg)}}
+.mega-text{flex:1;min-width:0}
+.mega-btn-title{
+  display:block;font-family:var(--font-display);
+  font-size:clamp(16px,4.5vw,18px);
+  font-weight:var(--fw-display);letter-spacing:.2px;color:#fff;
+  transition:all .3s;line-height:1.2;
+}
+.mega-button.state-claim .mega-btn-title{font-size:clamp(18px,5vw,20px)}
+.mega-btn-sub{
+  display:block;font-size:var(--fs-small);
+  color:var(--text2);margin-top:5px;line-height:1.4;
+}
+.mega-btn-timer-label{
+  display:block;font-size:var(--fs-tiny);
+  letter-spacing:var(--ls-label);color:var(--text2);
+  font-weight:700;opacity:.8;margin-bottom:5px;text-transform:uppercase;
+}
+.mega-btn-timer{
+  display:block;font-family:var(--font-display);
+  font-size:clamp(28px,8vw,38px);
+  font-weight:var(--fw-display);
+  letter-spacing:2px;font-variant-numeric:tabular-nums;
+  color:#fff;text-shadow:0 0 22px var(--green-glow);
+  line-height:1;
+}
+.mega-btn-progress-row{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-top:15px;margin-bottom:7px;
+}
+.mega-btn-progress-label{font-size:var(--fs-tiny);color:var(--text2);letter-spacing:var(--ls-label);font-weight:700;text-transform:uppercase}
+.mega-btn-progress-val{font-family:var(--font-display);font-size:14px;font-weight:var(--fw-display);color:#fff;letter-spacing:-.3px}
+.mega-progress{height:8px;background:rgba(0,0,0,.4);border-radius:20px;overflow:hidden;position:relative}
+.mega-progress span{
+  display:block;height:100%;width:0%;border-radius:20px;
+  background:linear-gradient(90deg,var(--green2),var(--green));
+  box-shadow:0 0 10px var(--green-glow);
+  transition:width .5s cubic-bezier(.4,0,.2,1);
+}
+.mega-btn-bottom{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-top:15px;
+  font-size:var(--fs-tiny);color:var(--text2);
+  letter-spacing:.3px;opacity:.85;
+}
+.mega-btn-bottom .mini-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--text2);margin-right:5px;vertical-align:middle;transition:all .3s;
+}
+.mega-button.state-mining .mini-dot{
+  background:var(--green);box-shadow:0 0 8px var(--green);
+  animation:pulseDot 1.4s infinite;
+}
+.mega-active-buffs{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;position:relative}
+.buff-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 9px;border-radius:20px;
+  background:rgba(255,215,106,.15);border:1px solid var(--gold);
+  color:var(--gold);font-size:9px;font-weight:800;letter-spacing:.5px;
+  animation:buffPulse 1.8s ease-in-out infinite;
+}
+@keyframes buffPulse{
+  0%,100%{box-shadow:0 0 6px rgba(255,215,106,.3)}
+  50%{box-shadow:0 0 14px rgba(255,215,106,.6)}
+}
+.notice{font-size:var(--fs-tiny);line-height:1.65;color:var(--muted);margin-top:12px;text-align:center}
+
+.daily-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:14px}
+.day{
+  padding:9px 2px;border:1px solid var(--border);
+  border-radius:var(--radius-badge);
+  background:var(--panel-solid);
+  text-align:center;font-size:var(--fs-tiny);
+  color:var(--muted);font-weight:600;letter-spacing:.3px;
+}
+.day strong{display:block;color:var(--gold);font-size:11px;margin-top:5px;font-weight:900}
+.day.claimed{border-color:var(--green);background:var(--green-dim);color:var(--text2)}
+.day.claimed strong{color:var(--green)}
+.day.today{border-color:var(--gold);box-shadow:0 0 12px rgba(255,200,75,.25);background:rgba(255,215,106,.08)}
+.day.today strong{color:var(--gold)}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px 16px;
+  border-radius:var(--radius-btn);
+  font-family:var(--font-display);
+  font-size:13px;font-weight:var(--fw-display);
+  letter-spacing:.3px;cursor:pointer;transition:all .25s;
+  border:1px solid var(--border);
+  background:var(--green-dim);color:var(--green);
+}
+.btn:not(:disabled):hover{background:var(--panel-input);border-color:var(--green);box-shadow:0 0 16px var(--green-glow)}
+.btn:not(:disabled):active{transform:scale(.985)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.primary{
+  background:linear-gradient(145deg,var(--green-dim),var(--panel2));
+  border-color:var(--green2);color:var(--text2);
+  box-shadow:var(--shadow-btn);
+}
+.btn.primary:not(:disabled):hover{background:linear-gradient(145deg,var(--green-dim),var(--panel-input));box-shadow:var(--shadow-btn),0 0 20px var(--green-glow)}
+.btn.danger{
+  color:var(--red);border-color:rgba(255,109,120,.35);
+  background:rgba(255,109,120,.08);
+}
+.btn.danger:hover{background:rgba(255,109,120,.15);border-color:var(--red)}
+.btn.ton{
+  background:linear-gradient(145deg,#0098EA,#0066A8);
+  border-color:#33AAFF;color:#fff;
+  box-shadow:0 6px 20px #0008,0 0 24px rgba(0,152,234,.4);
+}
+.btn.ton:not(:disabled):hover{background:linear-gradient(145deg,#33AAFF,#0080CC);box-shadow:0 8px 26px #000a,0 0 32px rgba(0,152,234,.6)}
+.btn.ton.connected{
+  background:linear-gradient(145deg,#001F33,#00111F);
+  border-color:#36c979;color:#72f0a0;
+  box-shadow:0 6px 20px #0008,0 0 20px rgba(54,201,121,.4);
+}
+.btn.telegram{
+  background:linear-gradient(145deg,#2AABEE,#1A8BC4);
+  border-color:#5BC0F0;color:#fff;
+  box-shadow:0 6px 20px #0008,0 0 24px rgba(42,171,238,.4);
+}
+.btn.telegram:not(:disabled):hover{background:linear-gradient(145deg,#5BC0F0,#2AABEE)}
+
+.mission{
+  display:flex;align-items:center;gap:10px;
+  padding:12px;border:1px solid var(--border);
+  border-radius:var(--radius-input);
+  background:var(--panel-solid);
+  margin-bottom:9px;transition:all .35s ease;
+}
+.mission:last-child{margin-bottom:0}
+.mission.done{
+  border-color:var(--green);
+  background:linear-gradient(145deg,var(--green-dim),var(--panel-solid));
+  opacity:.9;
+}
+.mission-main{flex:1;min-width:0}
+.mission-main strong{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px}
+.mission-main strong .icon{color:var(--green);flex-shrink:0}
+.mission-main small{font-size:var(--fs-tiny);color:var(--muted);line-height:1.4}
+.mission .pts{display:inline-flex;align-items:center;gap:3px;font-size:var(--fs-tiny);color:var(--gold);font-weight:800;white-space:nowrap;letter-spacing:.3px}
+.mission-btns{display:flex;flex-direction:column;gap:5px;flex-shrink:0}
+.btn-social, .claim-small{
+  padding:7px 11px;border:1px solid var(--border-strong);
+  border-radius:var(--radius-badge);
+  background:var(--green-dim);color:var(--green);
+  font-family:var(--font-display);
+  font-size:var(--fs-tiny);font-weight:var(--fw-display);
+  cursor:pointer;transition:all .2s;letter-spacing:.3px;
+  display:inline-flex;align-items:center;gap:4px;
+  white-space:nowrap;
+}
+.btn-social:hover, .claim-small:not(:disabled):hover{background:var(--panel-input);border-color:var(--green);box-shadow:0 0 12px var(--green-glow)}
+.claim-small:disabled{opacity:.35;cursor:not-allowed}
+.btn-social.telegram{border-color:var(--telegram);color:var(--telegram)}
+.btn-social.telegram:hover{border-color:#55bbff;background:rgba(42,171,238,.15)}
+.btn-social.tiktok{border-color:var(--tiktok);color:var(--tiktok)}
+.btn-social.tiktok:hover{border-color:#ff5577;background:rgba(254,44,85,.15)}
+.btn-social.youtube{border-color:var(--youtube);color:var(--youtube)}
+.btn-social.youtube:hover{border-color:#ff4444;background:rgba(255,0,0,.15)}
+.btn-social.x{border-color:#fff;color:#fff}
+.btn-social.x:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+
+/* ============ SKIN GRID ============ */
+.skin-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.skin{
+  padding:14px;border:1px solid var(--border);
+  border-radius:var(--radius-card);
+  background:linear-gradient(145deg,var(--panel1),var(--panel2));
+  text-align:left;cursor:pointer;transition:all .3s;
+  font-family:inherit;color:var(--text);
+  display:grid;grid-template-columns:52px 1fr auto;
+  align-items:center;gap:12px;
+  position:relative;overflow:hidden;
+}
+.skin:hover:not(.active):not(.locked){border-color:var(--green);transform:translateY(-2px);box-shadow:0 8px 24px #0008,0 0 20px var(--green-glow)}
+.skin.locked{cursor:pointer;opacity:.85}
+.skin.locked:hover{opacity:1;border-color:#0098EA}
+.skin .skin-art{
+  height:52px;width:52px;display:grid;place-items:center;
+  border-radius:14px;border:2px solid var(--border);
+  flex-shrink:0;
+}
+.skin .skin-art .icon{width:26px;height:26px}
+.skin .skin-info{min-width:0;display:flex;flex-direction:column;gap:3px}
+.skin .skin-name{font-family:var(--font-display);font-size:13px;font-weight:var(--fw-display);letter-spacing:.3px;color:var(--text);display:flex;align-items:center;gap:6px}
+.skin .skin-desc{font-size:10px;color:var(--muted);line-height:1.35}
+.skin .skin-price{
+  padding:6px 12px;border:1px solid var(--border-strong);
+  border-radius:20px;background:var(--green-dim);
+  color:var(--green);font-family:var(--font-display);
+  font-size:11px;font-weight:900;letter-spacing:.4px;
+  white-space:nowrap;transition:all .2s;
+  display:inline-flex;align-items:center;gap:3px;
+}
+.skin.locked .skin-price{
+  background:rgba(0,152,234,.12);
+  border-color:#0098EA;
+  color:#33AAFF;
+}
+.skin.locked:hover .skin-price{background:#0098EA;color:#fff}
+.skin.active{border:2px solid var(--green);box-shadow:0 0 20px var(--green-glow);background:linear-gradient(145deg,var(--green-dim),var(--panel2))}
+.skin.active .skin-price{background:var(--green);color:var(--bg-base);border-color:var(--green)}
+.skin.free-tag .skin-price{background:rgba(114,240,160,.2);color:var(--green)}
+.skin.t-ton .skin-art{color:#33AAFF;background:radial-gradient(circle,#001F33,#000A14);border-color:#0098EA}
+.skin.t-galaxy .skin-art{color:#7c5cff;background:radial-gradient(circle,#2a1a5a,#0a0420);border-color:#5a3aaa}
+.skin.t-cyber .skin-art{color:#00d4ff;background:radial-gradient(circle,#0a1e33,#05101f);border-color:#0088aa}
+.skin.t-gold .skin-art{color:#ffc84b;background:radial-gradient(circle,#2a1e0a,#120d04);border-color:#a88020}
+.skin.t-emerald .skin-art{color:#00ff9d;background:radial-gradient(circle,#0a3a2a,#042018);border-color:#00a060}
+.skin.t-crimson .skin-art{color:#ff3b5c;background:radial-gradient(circle,#3a0a15,#200610);border-color:#aa2038}
+
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat-box{
+  padding:11px 12px;border:1px solid var(--border);
+  border-radius:var(--radius-input);
+  background:var(--panel-solid);
+  display:flex;align-items:center;gap:9px;
+}
+.stat-box .emoji{color:var(--green);flex-shrink:0;display:grid;place-items:center;width:24px;height:24px}
+.stat-box .content{min-width:0}
+.stat-box small{display:block;font-size:9px;color:var(--muted);font-weight:600;letter-spacing:.5px}
+.stat-box strong{display:block;font-size:13px;font-weight:900;color:var(--text);margin-top:3px;letter-spacing:-.3px;font-family:var(--font-display)}
+
+.leader-row{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:8px;padding:10px 0;
+  border-bottom:1px solid var(--border);font-size:12px;
+}
+.leader-row:last-child{border-bottom:0;color:var(--green);font-weight:800}
+.leader-row .name{display:flex;align-items:center;gap:8px;color:var(--text);font-weight:600}
+.leader-row .pts{color:var(--green);font-weight:900;letter-spacing:-.3px;font-family:var(--font-display)}
+
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.shop-item{
+  padding:14px 12px;
+  border:1px solid var(--border);border-radius:var(--radius-card);
+  background:var(--panel-solid);
+  transition:all .25s;
+  display:flex;flex-direction:column;gap:8px;
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.shop-item:hover{border-color:#0098EA;transform:translateY(-2px);box-shadow:0 8px 24px #0008,0 0 20px rgba(0,152,234,.35)}
+.shop-item.owned{border-color:var(--green);background:linear-gradient(145deg,var(--green-dim),var(--panel-solid));cursor:default}
+.shop-item.owned:hover{transform:none}
+.shop-item.owned::after{
+  content:"DIMILIKI";position:absolute;top:10px;right:10px;
+  padding:3px 8px;border-radius:20px;
+  background:var(--green);color:var(--bg-base);
+  font-size:8px;font-weight:900;letter-spacing:.5px;
+}
+.shop-item.consumable-badge::after{
+  content:"KONSUMABEL";position:absolute;top:10px;right:10px;
+  padding:3px 8px;border-radius:20px;
+  background:rgba(255,215,106,.15);border:1px solid var(--gold);
+  color:var(--gold);font-size:8px;font-weight:900;letter-spacing:.5px;
+}
+.shop-item .big{color:#33AAFF;line-height:1;filter:drop-shadow(0 0 8px rgba(0,152,234,.5))}
+.shop-item .big .icon{width:32px;height:32px}
+.shop-item h3{font-size:13px;font-weight:800;margin:0;color:var(--text);font-family:var(--font-display);letter-spacing:.2px;padding-right:80px;line-height:1.3}
+.shop-item p{font-size:10.5px;color:var(--muted);line-height:1.4;margin:0;flex:1}
+.shop-item .shop-price{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:auto;padding-top:4px}
+.shop-item .shop-price span:first-child{
+  color:#33AAFF;font-family:var(--font-display);
+  font-weight:900;font-size:12px;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.shop-item .shop-price .price-tag{
+  padding:5px 10px;border:1px solid #0098EA;
+  border-radius:20px;background:rgba(0,152,234,.12);
+  color:#33AAFF;font-family:var(--font-display);
+  font-size:10px;font-weight:900;letter-spacing:.3px;
+  transition:all .2s;display:inline-flex;align-items:center;gap:3px;
+}
+.shop-item:not(.owned):hover .shop-price .price-tag{background:#0098EA;color:#fff}
+
+.buff-panel{
+  padding:12px;border:1px solid var(--gold);
+  border-radius:var(--radius-input);
+  background:linear-gradient(145deg,rgba(255,215,106,.08),var(--panel-solid));
+  margin-bottom:14px;
+}
+.buff-panel h4{
+  margin:0 0 8px;font-size:11px;color:var(--gold);
+  letter-spacing:1.5px;font-weight:900;text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.buff-list{display:flex;flex-wrap:wrap;gap:6px}
+.buff-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 10px;border-radius:20px;
+  background:rgba(255,215,106,.15);
+  border:1px solid var(--gold);color:var(--gold);
+  font-size:10px;font-weight:800;letter-spacing:.3px;
+}
+
+/* ============ WALLET ============ */
+.wallet-balance-card{
+  padding:24px 20px;
+  border:2px solid #0098EA;
+  border-radius:var(--radius-card);
+  background:linear-gradient(145deg,#001F33,#00111F);
+  position:relative;overflow:hidden;
+  margin-bottom:14px;
+  box-shadow:0 12px 40px #000a,0 0 40px rgba(0,152,234,.3);
+}
+.wallet-balance-card::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,152,234,.3),transparent 50%),
+    radial-gradient(circle at 80% 80%,rgba(0,152,234,.3),transparent 50%);
+  opacity:.4;pointer-events:none;
+  animation:walletPulse 4s ease-in-out infinite;
+}
+@keyframes walletPulse{0%,100%{opacity:.3}50%{opacity:.6}}
+.wallet-balance-label{
+  position:relative;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:11px;color:#8FD4FF;
+  letter-spacing:2px;font-weight:700;margin-bottom:14px;
+  text-transform:uppercase;
+}
+.wallet-balance-amount{
+  position:relative;
+  display:flex;align-items:baseline;justify-content:center;gap:8px;
+  font-family:var(--font-display);
+}
+.wallet-balance-amount .num{
+  font-size:clamp(38px,11vw,52px);
+  font-weight:900;letter-spacing:-2px;
+  color:#fff;text-shadow:0 0 30px rgba(0,152,234,.6);
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.wallet-balance-amount .unit{
+  font-size:16px;font-weight:800;
+  color:#33AAFF;letter-spacing:1.5px;
+}
+.wallet-balance-sub{
+  position:relative;text-align:center;margin-top:14px;
+  font-size:11px;color:#8FD4FF;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.wallet-balance-sub .est{
+  padding:5px 12px;border-radius:20px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  font-weight:800;color:#fff;
+  font-family:var(--font-display);letter-spacing:.5px;
+}
+
+.ton-connect-card{
+  padding:18px 16px;
+  border:1px solid var(--border);border-radius:var(--radius-card);
+  background:linear-gradient(155deg,var(--panel1),var(--panel2));
+  margin-bottom:14px;
+  position:relative;overflow:hidden;
+}
+.ton-connect-card.connected{
+  border-color:#0098EA;
+  background:linear-gradient(155deg,#001F33,#00111F);
+  box-shadow:0 0 30px rgba(0,152,234,.2);
+}
+.ton-connect-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ton-logo{
+  width:52px;height:52px;border-radius:14px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#0098EA,#0066A8);
+  border:1px solid #33AAFF;
+  box-shadow:0 0 20px rgba(0,152,234,.4);
+  flex-shrink:0;
+}
+.ton-logo svg{width:28px;height:28px;fill:#fff}
+.ton-connect-info{flex:1;min-width:0}
+.ton-connect-info h3{font-size:14px;font-weight:800;color:var(--text);margin:0 0 4px;font-family:var(--font-display);letter-spacing:.3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ton-connect-info p{font-size:11px;color:var(--muted);margin:0;line-height:1.4}
+.ton-connected-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 8px;border-radius:20px;
+  background:rgba(0,152,234,.15);
+  border:1px solid #0098EA;color:#33AAFF;
+  font-size:8px;font-weight:900;letter-spacing:.6px;
+}
+.ton-connected-badge .live-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:#33AAFF;box-shadow:0 0 6px #33AAFF;
+  animation:pulseDot 1.2s infinite;
+}
+.wallet-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.wallet-info-box{
+  padding:12px;border:1px solid var(--border);
+  border-radius:var(--radius-input);
+  background:var(--panel-solid);
+}
+.wallet-info-box small{display:flex;align-items:center;gap:5px;font-size:9px;color:var(--muted);font-weight:600;letter-spacing:.5px;margin-bottom:6px}
+.wallet-info-box strong{display:block;font-size:13px;font-weight:900;color:var(--text);letter-spacing:-.3px;font-family:var(--font-display)}
+.wallet-info-box strong.ton-amount{color:#33AAFF}
+
+.exchange-section{
+  padding:16px;
+  border:1px solid #0098EA44;
+  border-radius:var(--radius-card);
+  background:linear-gradient(145deg,rgba(0,152,234,.06),var(--panel-solid));
+  margin-bottom:14px;
+}
+.exchange-section h3{
+  font-size:14px;font-weight:800;
+  color:var(--text);margin:0 0 6px;
+  font-family:var(--font-display);
+  display:flex;align-items:center;gap:8px;
+}
+.exchange-section p{font-size:11px;color:var(--muted);margin:0 0 12px;line-height:1.5}
+.exchange-section .rate-line{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:12px 14px;border-radius:12px;
+  background:rgba(0,152,234,.1);
+  border:1px solid #0098EA33;
+  margin-bottom:12px;
+  font-family:var(--font-display);
+  font-weight:800;flex-wrap:wrap;
+  font-size:13px;
+}
+.exchange-section .rate-line .pts-side{color:var(--green)}
+.exchange-section .rate-line .ton-side{color:#33AAFF}
+.exchange-section .rate-line .arrow{color:var(--muted);font-size:14px}
+
+/* ============ ROADMAP ============ */
+.roadmap-phase{
+  padding:14px;
+  border:1px solid var(--border);
+  border-left:3px solid var(--green);
+  border-radius:var(--radius-input);
+  background:linear-gradient(90deg,var(--green-dim),var(--panel-solid));
+  margin-bottom:10px;
+  position:relative;
+}
+.roadmap-phase:last-child{margin-bottom:0}
+.roadmap-phase.done{border-left-color:var(--green);opacity:.85}
+.roadmap-phase.current{
+  border-left-color:var(--gold);
+  background:linear-gradient(90deg,rgba(255,215,106,.08),var(--panel-solid));
+  box-shadow:0 0 20px rgba(255,215,106,.15);
+}
+.roadmap-phase.future{border-left-color:var(--muted)}
+.roadmap-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;margin-bottom:6px;
+}
+.roadmap-head h4{
+  margin:0;font-family:var(--font-display);
+  font-size:13px;font-weight:800;
+  color:var(--text);letter-spacing:.3px;
+}
+.roadmap-target{
+  padding:2px 8px;border-radius:20px;
+  background:var(--green-dim);
+  border:1px solid var(--border-strong);
+  font-family:var(--font-display);
+  font-size:9px;font-weight:800;
+  color:var(--green);letter-spacing:.4px;
+}
+.roadmap-phase.current .roadmap-target{
+  background:rgba(255,215,106,.15);
+  border-color:var(--gold);color:var(--gold);
+}
+.roadmap-desc{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.5;
+  margin:0 0 8px;
+}
+.roadmap-items{
+  display:flex;flex-wrap:wrap;gap:5px;
+}
+.roadmap-item{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 8px;border-radius:12px;
+  background:var(--panel-solid);
+  border:1px solid var(--border);
+  font-size:9.5px;
+  color:var(--text2);
+  font-weight:600;
+  letter-spacing:.2px;
+}
+.roadmap-item .icon{color:var(--green);width:11px;height:11px}
+
+/* ============ IDENTITAS PROYEK ============ */
+.project-table{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.project-row{
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-input);
+  background:var(--panel-solid);
+}
+.project-row small{
+  display:flex;align-items:center;gap:5px;
+  font-size:9px;color:var(--muted);
+  font-weight:600;letter-spacing:.5px;
+  margin-bottom:5px;text-transform:uppercase;
+}
+.project-row strong{
+  display:block;font-size:12px;
+  color:var(--text);font-weight:800;
+  font-family:var(--font-display);
+  letter-spacing:.2px;
+}
+.project-row strong.ton-amount{color:#33AAFF}
+.project-row strong.mpe{color:var(--gold)}
+
+/* ============ TELEGRAM BADGE ============ */
+.tg-callout{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;
+  border:1px solid var(--telegram);
+  border-radius:var(--radius-card);
+  background:linear-gradient(145deg,rgba(42,171,238,.08),var(--panel-solid));
+  margin-bottom:14px;
+}
+.tg-callout-icon{
+  width:44px;height:44px;
+  border-radius:12px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#2AABEE,#1A8BC4);
+  color:#fff;flex-shrink:0;
+  box-shadow:0 0 20px rgba(42,171,238,.4);
+}
+.tg-callout-icon .icon{width:24px;height:24px}
+.tg-callout-text{flex:1;min-width:0}
+.tg-callout-text h4{
+  margin:0 0 3px;
+  font-size:12px;font-weight:800;
+  color:var(--text);
+  font-family:var(--font-display);
+  letter-spacing:.2px;
+}
+.tg-callout-text p{
+  margin:0;font-size:10.5px;
+  color:var(--muted);line-height:1.4;
+}
+
+.info-list{padding-left:0;margin:0;list-style:none;font-size:var(--fs-small);line-height:1.9;color:var(--muted)}
+.info-list li{padding-left:18px;position:relative}
+.info-list li::before{content:"•";position:absolute;left:6px;color:var(--green);font-weight:900}
+.info-list b{color:var(--text2)}
+
+/* NAV BAR */
+.nav{
+  position:fixed;z-index:10;bottom:0;left:0;right:0;
+  background:color-mix(in srgb,var(--panel1) 96%,transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:center;
+  padding:10px max(10px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+  box-shadow:0 -8px 30px #0008;
+}
+.nav-inner{display:flex;justify-content:space-around;gap:6px;width:min(440px,100%)}
+.nav button{
+  flex:1;padding:12px 6px;
+  border:0;background:transparent;
+  color:var(--muted);border-radius:14px;
+  font-size:11px;font-weight:700;cursor:pointer;
+  transition:all .25s;
+  font-family:var(--font-display);letter-spacing:.5px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  position:relative;min-height:64px;
+}
+.nav button .nav-icon{display:grid;place-items:center;width:26px;height:26px;transition:transform .3s}
+.nav button .nav-icon svg{width:24px;height:24px}
+.nav button:hover{color:var(--text)}
+.nav button:hover .nav-icon{transform:translateY(-2px) scale(1.08)}
+.nav button.active{
+  color:var(--green);
+  background:linear-gradient(0deg,var(--green-glow),transparent);
+  box-shadow:inset 0 0 0 1px var(--border-strong);
+}
+.nav button.active .nav-icon{filter:drop-shadow(0 0 10px var(--green-glow));transform:translateY(-1px) scale(1.05)}
+.nav button .nav-label{font-size:10.5px;letter-spacing:.6px;font-weight:800}
+
+.toast{
+  position:fixed;left:50%;bottom:110px;
+  transform:translateX(-50%) translateY(80px);
+  padding:12px 18px;
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-btn);
+  background:linear-gradient(145deg,var(--green-dim),var(--panel2));
+  color:var(--text2);font-size:var(--fs-small);font-weight:700;
+  box-shadow:0 12px 40px #000c,0 0 20px var(--green-glow);
+  z-index:200;opacity:0;pointer-events:none;
+  transition:all .35s cubic-bezier(.22,1.5,.36,1);
+  max-width:90vw;text-align:center;letter-spacing:.2px;
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+.modal-back{
+  position:fixed;inset:0;
+  background:color-mix(in srgb,var(--bg-base) 90%,transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  z-index:100;display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-back.show{display:flex;animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{
+  width:100%;max-width:400px;padding:22px 20px;
+  border:1px solid var(--border);border-radius:var(--radius-card);
+  background:linear-gradient(155deg,var(--panel1),var(--panel2));
+  box-shadow:0 30px 80px #000e;
+  animation:modalIn .3s cubic-bezier(.22,1.5,.36,1);
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal h3{margin:0 0 10px;font-family:var(--font-display);font-size:16px;font-weight:var(--fw-display);color:var(--text);text-align:center;letter-spacing:-.3px;display:flex;align-items:center;justify-content:center;gap:8px}
+.modal h3 .icon{color:var(--green)}
+.modal p{margin:0;color:var(--muted);font-size:var(--fs-body);line-height:1.6;text-align:center;white-space:pre-line}
+.modal-actions{display:flex;gap:8px;margin-top:16px}
+.modal-actions button{
+  flex:1;padding:11px;border:1px solid var(--border);
+  border-radius:var(--radius-btn);background:transparent;
+  color:var(--text);font-family:var(--font-display);
+  font-size:12px;font-weight:var(--fw-display);
+  cursor:pointer;transition:all .2s;letter-spacing:.3px;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+}
+.modal-actions button:hover{background:var(--green-dim)}
+.modal-actions .btn-confirm{
+  background:linear-gradient(145deg,var(--green-dim),var(--panel2));
+  border-color:var(--green2);color:var(--text2);
+}
+
+.spin-wheel-wrap{padding:20px 10px;text-align:center}
+.spin-result{
+  font-family:var(--font-display);
+  font-size:48px;font-weight:900;
+  color:var(--green);letter-spacing:-2px;
+  text-shadow:0 0 30px var(--green-glow);
+  margin:10px 0;min-height:60px;
+  display:flex;align-items:center;justify-content:center;
+}
+.spin-result.rolling{animation:spinRoll .1s linear infinite}
+@keyframes spinRoll{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+.footer{margin-top:18px;color:var(--muted2);font-size:9px;letter-spacing:1.2px;text-align:center;font-weight:600;font-family:var(--font-display)}
+.footer-line{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:5px;font-size:8.5px}
+
+@media(max-width:380px){
+  .mega-icon{width:56px;height:56px}
+  .mega-icon .icon{width:26px;height:26px}
+  .mega-btn-timer{font-size:26px}
+  .avatar{width:48px;height:48px}
+  .shop-item h3{padding-right:70px}
+  .skin{grid-template-columns:46px 1fr auto;gap:10px;padding:12px}
+  .skin .skin-art{width:46px;height:46px}
+  .nav button{padding:10px 4px;min-height:60px}
+  .nav button .nav-icon svg{width:22px;height:22px}
+  .nav button .nav-label{font-size:9.5px}
+  .project-table{grid-template-columns:1fr}
+}
+@media(max-width:340px){
+  .daily-grid{grid-template-columns:repeat(4,1fr)}
+  .shop-grid{grid-template-columns:1fr}
+  .skin{grid-template-columns:42px 1fr auto;gap:8px;padding:10px}
+  .skin .skin-art{width:42px;height:42px}
+  .wallet-info-grid{grid-template-columns:1fr}
+  .balance-strip{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SVG ICONS -->
+<svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
+  <defs>
+    <symbol id="i-pickaxe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-3 3-7-7z"/><path d="M11 6L4 13l3 3 7-7"/><path d="M3 21l4-4"/><path d="M13 14l7 7"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 100 18 3 3 0 003-3 3 3 0 00-3-3h-1a3 3 0 010-6h4a3 3 0 003-3 9 9 0 00-6-3z"/><circle cx="7.5" cy="11" r="1" fill="currentColor"/><circle cx="9" cy="7" r="1" fill="currentColor"/><circle cx="13" cy="6" r="1" fill="currentColor"/><circle cx="17" cy="10" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-stats" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-8"/><path d="M22 20H2"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 01-8 0V3z"/><path d="M8 5H5a3 3 0 003 3"/><path d="M16 5h3a3 3 0 01-3 3"/><path d="M10 17h4v3h-4z"/><path d="M8 21h8"/><path d="M12 13v4"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M3 4h2l2 12h11l2-8H6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 01-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 01-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 01-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 010-4h.1A1.7 1.7 0 004.6 9a1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 012.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 014 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 012.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 010 4h-.1a1.7 1.7 0 00-1.5 1z"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M9 9h5a2 2 0 010 4h-4a2 2 0 000 4h5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.3.9-4.5 4.4 1 6.1L12 17l-5.5 2.9 1-6.1L3 9.5l6.3-.9z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18"/><path d="M9 3l-1 6 4 12 4-12-1-6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8v8"/><path d="M16 8v8"/><path d="M12 8v8"/><circle cx="8" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="16" cy="12" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5"/><circle cx="12" cy="8" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 20h20z"/><path d="M12 10v4"/><circle cx="12" cy="17.5" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M10 4h4l1 3H9z"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.5 3.6-8 8-8s8 3.5 8 8"/></symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3 4 4 4 8a4 4 0 01-8 0c0-2 1-3 2-4-1 3 1 3 1 3 0-2 2-3 1-7z"/><path d="M12 21a5 5 0 005-5c0-2-1-3-2-4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></symbol>
+    <symbol id="i-galaxy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 3 6 6 6 9s-3 6-6 6-6-3-6-6 2-6 6-9z"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="7" cy="9" r=".8" fill="currentColor"/><circle cx="17" cy="15" r=".8" fill="currentColor"/></symbol>
+    <symbol id="i-cyber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-royal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-6 5 6 4-4-2 11H5z"/><circle cx="3" cy="8" r="1" fill="currentColor"/><circle cx="21" cy="8" r="1" fill="currentColor"/><circle cx="12" cy="6" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 12L3 9z"/><path d="M3 9h18"/><path d="M9 3l-1 6 4 12 4-12-1-6"/></symbol>
+    <symbol id="i-crimson" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 5-6 7-6 11a6 6 0 0012 0c0-4-3-6-6-11z"/><path d="M9 14a3 3 0 003 3"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M3 10h18"/><circle cx="17" cy="14" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l-4 4 4 4"/><path d="M3 8h13a4 4 0 010 8h-1"/><path d="M17 20l4-4-4-4"/><path d="M21 16H8a4 4 0 010-8h1"/></symbol>
+    <symbol id="i-telegram" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 00.5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 002.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 002.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.64 7.58H.48l8.6-9.83L0 1.15h7.6l5.24 6.93 6.06-6.93zm-1.29 19.5h2.04L6.5 3.24H4.31L17.61 20.65z"/></symbol>
+    <symbol id="i-ton" viewBox="0 0 56 56" fill="currentColor"><path d="M42.4 8H13.6C8.3 8 5 13.7 7.6 18.2l16.4 28.4c1.7 2.9 5.9 2.9 7.6 0l16.4-28.4C50.6 13.7 47.3 8 42.4 8zM25 47l-6-27h6v27zm18-6.4L28 45.4V24.5c0-1.4 1.1-2.5 2.5-2.5h11.7l1.4 2.4c1 1.7.9 3.8-.6 5.2z"/></symbol>
+    <symbol id="i-roadmap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v18"/><path d="M15 3v18"/><path d="M6 6l3-3 3 3"/><path d="M12 15l3 3 3-3"/><circle cx="6" cy="12" r="1.2" fill="currentColor"/><circle cx="18" cy="12" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l-3 3-2 5 5-2 3-3"/><path d="M14 4a6 6 0 016 6c0 3-2 5-4 7l-5-5c2-2 4-4 7-4"/><circle cx="15" cy="9" r="1.5" fill="currentColor"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h12l-3 4 3 4H4"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+
+  <header class="header">
+    <div class="brand">
+      <div class="brand-icon"><svg class="icon icon-md"><use href="#i-pickaxe"/></svg></div>
+      <div>
+        <div class="brand-name">MINEPOINT</div>
+        <div class="brand-sub">
+          <span class="mpe-badge">$MPE</span>
+          <span>PLAY · MINE · EARN</span>
+        </div>
+      </div>
+    </div>
+    <div class="header-status">
+      <span class="dot"></span>
+      <span>V1 DEMO</span>
+    </div>
+  </header>
+
+  <!-- ============ MINING ============ -->
+  <section class="page active" id="page-mining">
+    <h2 class="page-title">
+      <svg class="icon icon-sm"><use href="#i-pickaxe"/></svg>
+      Mining
+    </h2>
+    <p class="page-intro">Satu tombol — klik untuk farming, tunggu, lalu klaim.</p>
+<!--
+    <div class="balance-strip">
+      <div class="balance-strip-item pts">
+        <div class="mini-label"><svg class="icon icon-xs"><use href="#i-coin"/></svg> PTS</div>
+        <div class="mini-value" id="topPts">500</div>
+        <div class="mini-sub">Poin reward</div>
+      </div>
+      <div class="balance-strip-item ton">
+        <div class="mini-label"><svg class="icon icon-xs"><use href="#i-ton"/></svg> TON</div>
+        <div class="mini-value" id="topTon">0.0100</div>
+        <div class="mini-sub">Wallet balance</div>
+      </div>
+    </div>
+-->
+    <button class="mega-button state-ready" id="megaBtn">
+      <div class="mega-btn-head">
+        <div class="mega-icon" id="megaIcon"><svg class="icon"><use href="#i-pickaxe"/></svg></div>
+        <div class="mega-text">
+          <span class="mega-btn-title" id="megaTitle">Mulai Farming</span>
+          <span class="mega-btn-sub" id="megaSub">Klik untuk mulai menambang</span>
+        </div>
+      </div>
+      <span class="mega-btn-timer-label" id="megaTimerLabel">WAKTU FARMING</span>
+      <span class="mega-btn-timer" id="megaTimer">12:00:00</span>
+      <div class="mega-btn-progress-row">
+        <span class="mega-btn-progress-label">PROGRESS</span>
+        <span class="mega-btn-progress-val" id="megaPct">0%</span>
+      </div>
+      <div class="mega-progress"><span id="megaProgress"></span></div>
+      <div class="mega-btn-bottom">
+        <span><span class="mini-dot"></span><span id="megaBottomStatus">Menunggu dimulai</span></span>
+        <span>REWARD +100 PTS</span>
+      </div>
+      <div class="mega-active-buffs" id="megaBuffs"></div>
+    </button>
+
+    <div class="notice">
+      Timer 12 jam per sesi. Data tersimpan di browser.<br>
+      PTS adalah poin reward demo — konversi ke $MPE akan tersedia di Fase 4.
+    </div>
+  </section>
+
+  <!-- ============ MISI ============ -->
+  <section class="page" id="page-missions">
+    <h2 class="page-title">
+      <svg class="icon icon-sm"><use href="#i-target"/></svg>
+      Misi
+    </h2>
+    <p class="page-intro">Login harian, misi dasar, dan tugas sosial.</p>
+
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-gift"/></svg>
+        LOGIN HARIAN
+      </h2>
+      <p class="section-sub">Login setiap hari untuk bonus bertingkat 7 hari.</p>
+      <div class="daily-grid" id="dailyGrid"></div>
+      <button class="btn primary" id="dailyBtn">Klaim Reward Harian</button>
+      <div class="notice" style="margin-top:10px">
+        Streak: <b id="dailyStreak">0 hari</b> · Reset jika bolong 1 hari.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-target"/></svg>
+        MISI HARIAN
+      </h2>
+      <p class="section-sub">Misi dasar yang di-reset otomatis setiap hari.</p>
+
+      <div class="mission" id="missionMine">
+        <div class="mission-main">
+          <strong><svg class="icon icon-xs"><use href="#i-pickaxe"/></svg> Mulai mining 1 kali</strong>
+          <small id="mineMissionStatus">0/1 hari ini</small>
+        </div>
+        <span class="pts"><svg class="icon icon-xs"><use href="#i-coin"/></svg> +50 PTS</span>
+        <button class="claim-small" id="mineMissionBtn">Klaim</button>
+      </div>
+
+      <div class="mission" id="missionShop">
+        <div class="mission-main">
+          <strong><svg class="icon icon-xs"><use href="#i-cart"/></svg> Jelajahi Shop</strong>
+          <small id="shopMissionStatus">0/1 hari ini</small>
+        </div>
+        <span class="pts"><svg class="icon icon-xs"><use href="#i-coin"/></svg> +25 PTS</span>
+        <button class="claim-small" id="shopMissionBtn">Klaim</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-star"/></svg>
+        TUGAS SOSIAL
+      </h2>
+      <p class="section-sub">Ikuti akun resmi MinePoint. Klaim setelah selesai.</p>
+
+      <div class="mission" id="taskTelegramChannel">
+        <div class="mission-main">
+          <strong><svg class="icon icon-xs"><use href="#i-telegram"/></svg> Join Channel Telegram</strong>
+          <small id="taskTelegramChannelStatus">Belum diverifikasi</small>
+        </div>
+        <span class="pts"><svg class="icon icon-xs"><use href="#i-coin"/></svg> +150 PTS</span>
+        <div class="mission-btns">
+          <button class="btn-social telegram" data-url="https://t.me/minepoint_channel" data-task="taskTelegramChannel">
+            <svg class="icon icon-xs"><use href="#i-telegram"/></svg> Buka
+          </button>
+          <button class="claim-small" disabled id="taskTelegramChannelBtn">Klaim</button>
+        </div>
+      </div>
+
+      <div class="mission" id="taskTelegramGroup">
+        <div class="mission-main">
+          <strong><svg class="icon icon-xs"><use href="#i-telegram"/></svg> Join Grup Telegram</strong>
+          <small id="taskTelegramGroupStatus">Belum diverifikasi</small>
+        </div>
+        <span class="pts"><svg class="icon icon-xs"><use href="#i-coin"/></svg> +100 PTS</span>
+        <div class="mission-btns">
+          <button class="btn-social telegram" data-url="https://t.me/minepoint_group" data-task="taskTelegramGroup">
+            <svg class="icon icon-xs"><use href="#i-telegram"/></svg> Buka
+          </button>
+          <button class="claim-small" disabled id="taskTelegramGroupBtn">Klaim</button>
+        </div>
+      </div>
+
+      <div class="mission" id="taskTiktok">
+        <div class="mission-main">
+          <strong><svg class="icon icon-xs"><use href="#i-tiktok"/></svg> Follow TikTok</strong>
+          <small id="taskTiktokStatus">Belum diverifikasi</small>
+        </div>
+        <span class="pts"><svg class="icon icon-xs"><use href="#i-coin"/></svg> +75 PTS</span>
+        <div class="mission-btns">
+          <button class="btn-social tiktok" data-url="https://tiktok.com/@minepoint" data-task="taskTiktok">
+            <svg class="icon icon-xs"><use href="#i-tiktok"/></svg> Buka
+          </button>
+          <button class="claim-small" disabled id="taskTiktokBtn">Klaim</button>
+        </div>
+      </div>
+
+      <div class="mission" id="taskYoutube">
+        <div class="mission-main">
+          <strong><svg class="icon icon-xs"><use href="#i-youtube"/></svg> Subscribe YouTube</strong>
+          <small id="taskYoutubeStatus">Belum diverifikasi</small>
+        </div>
+        <span class="pts"><svg class="icon icon-xs"><use href="#i-coin"/></svg> +75 PTS</span>
+        <div class="mission-btns">
+          <button class="btn-social youtube" data-url="https://youtube.com/@minepoint" data-task="taskYoutube">
+            <svg class="icon icon-xs"><use href="#i-youtube"/></svg> Buka
+          </button>
+          <button class="claim-small" disabled id="taskYoutubeBtn">Klaim</button>
+        </div>
+      </div>
+
+      <div class="mission" id="taskX">
+        <div class="mission-main">
+          <strong><svg class="icon icon-xs"><use href="#i-x"/></svg> Follow X (Twitter)</strong>
+          <small id="taskXStatus">Belum diverifikasi</small>
+        </div>
+        <span class="pts"><svg class="icon icon-xs"><use href="#i-coin"/></svg> +50 PTS</span>
+        <div class="mission-btns">
+          <button class="btn-social x" data-url="https://x.com/minepoint" data-task="taskX">
+            <svg class="icon icon-xs"><use href="#i-x"/></svg> Buka
+          </button>
+          <button class="claim-small" disabled id="taskXBtn">Klaim</button>
+        </div>
+      </div>
+
+      <div class="notice">
+        Klik "Buka" untuk verifikasi, lalu "Klaim" untuk dapat PTS.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WALLET ============ -->
+  <section class="page" id="page-wallet">
+    <h2 class="page-title">
+      <svg class="icon icon-sm"><use href="#i-wallet"/></svg>
+      Wallet
+    </h2>
+    <p class="page-intro">Saldo TON, koneksi wallet, dan konversi ke $MPE.</p>
+
+    <div class="tg-callout">
+      <div class="tg-callout-icon"><svg class="icon"><use href="#i-telegram"/></svg></div>
+      <div class="tg-callout-text">
+        <h4>Telegram Mini App</h4>
+        <p>V2 akan hadir sebagai Mini App di dalam Telegram dengan TonConnect integration.</p>
+      </div>
+    </div>
+
+    <div class="wallet-balance-card">
+      <div class="wallet-balance-label">
+        <svg class="icon icon-xs"><use href="#i-ton"/></svg>
+        SALDO TON
+      </div>
+      <div class="wallet-balance-amount">
+        <span class="num" id="walletBalance">0.0100</span>
+        <span class="unit">TON</span>
+      </div>
+      <div class="wallet-balance-sub">
+        <span>≈</span>
+        <span class="est" id="walletEstimate">500 PTS</span>
+      </div>
+    </div>
+
+    <div class="ton-connect-card" id="tonCard">
+      <div class="ton-connect-head">
+        <div class="ton-logo">
+          <svg viewBox="0 0 56 56"><path d="M42.4 8H13.6C8.3 8 5 13.7 7.6 18.2l16.4 28.4c1.7 2.9 5.9 2.9 7.6 0l16.4-28.4C50.6 13.7 47.3 8 42.4 8zM25 47l-6-27h6v27zm18-6.4L28 45.4V24.5c0-1.4 1.1-2.5 2.5-2.5h11.7l1.4 2.4c1 1.7.9 3.8-.6 5.2z" fill="#fff"/></svg>
+        </div>
+        <div class="ton-connect-info">
+          <h3>
+            TON Connect
+            <span class="ton-connected-badge" id="tonConnectedBadge" style="display:none">
+              <span class="live-dot"></span>CONNECTED
+            </span>
+          </h3>
+          <p id="tonDesc">Hubungkan wallet TON untuk pembelian item.</p>
+        </div>
+      </div>
+      <button class="btn ton" id="tonConnectBtn">
+        <svg class="icon icon-sm"><use href="#i-link"/></svg>
+        Connect TON Wallet
+      </button>
+    </div>
+
+    <div class="wallet-info-grid">
+      <div class="wallet-info-box">
+        <small><svg class="icon icon-xs"><use href="#i-coin"/></svg> SALDO PTS</small>
+        <strong id="walletPts">500 PTS</strong>
+      </div>
+      <div class="wallet-info-box">
+        <small><svg class="icon icon-xs"><use href="#i-gift"/></svg> TOTAL REWARD</small>
+        <strong id="walletTotalReward">0 PTS</strong>
+      </div>
+    </div>
+
+    <div class="exchange-section">
+      <h3>
+        <svg class="icon icon-sm"><use href="#i-swap"/></svg>
+        PTS → $MPE
+      </h3>
+      <p>Konversi PTS ke token $MPE akan aktif di Fase 4 — setelah smart contract Jetton TON dirilis.</p>
+      <div class="rate-line">
+        <span class="pts-side" id="convertPtsSide">100.000 PTS</span>
+        <span class="arrow"><svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        <span class="ton-side">1 $MPE</span>
+      </div>
+      <button class="btn primary" id="convertBtn" disabled>
+        <svg class="icon icon-sm"><use href="#i-swap"/></svg>
+        Segera Hadir (Fase 4)
+      </button>
+    </div>
+
+    <div class="notice">
+      Saldo TON demo. Integrasi TON Blockchain penuh akan hadir di Fase 3-4.
+    </div>
+  </section>
+
+  <!-- ============ SHOP ============ -->
+  <section class="page" id="page-shop">
+    <h2 class="page-title">
+      <svg class="icon icon-sm"><use href="#i-cart"/></svg>
+      Shop
+    </h2>
+    <p class="page-intro">Semua item dibeli menggunakan TON.</p>
+
+  <!---  <div class="balance-strip">
+      <div class="balance-strip-item pts">
+        <div class="mini-label"><svg class="icon icon-xs"><use href="#i-coin"/></svg> PTS</div>
+        <div class="mini-value" id="shopPts">500</div>
+        <div class="mini-sub">Poin reward</div>
+      </div>
+      <div class="balance-strip-item ton">
+        <div class="mini-label"><svg class="icon icon-xs"><use href="#i-ton"/></svg> TON</div>
+        <div class="mini-value" id="shopTon">0.0100</div>
+        <div class="mini-sub">Balance</div>
+      </div>
+    </div>
+-->
+    <div class="buff-panel" id="buffPanel" style="display:none">
+      <h4><svg class="icon icon-xs"><use href="#i-bolt"/></svg> BUFF AKTIF</h4>
+      <div class="buff-list" id="buffList"></div>
+    </div>
+
+    <div class="shop-grid" id="shopGrid"></div>
+
+    <div class="notice" style="margin-top:14px">
+      Belum punya TON? Connect wallet dulu di tab <b>Wallet</b>.
+    </div>
+  </section>
+
+  <!-- ============ PENGATURAN ============ -->
+  <section class="page" id="page-settings">
+    <h2 class="page-title">
+      <svg class="icon icon-sm"><use href="#i-settings"/></svg>
+      Pengaturan
+    </h2>
+    <p class="page-intro">Info akun, roadmap, skin & tema, dan reset data demo.</p>
+
+    <!-- INFO USER -->
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-user"/></svg>
+        INFORMASI AKUN
+      </h2>
+      <p class="section-sub">Detail profil dan level akun kamu.</p>
+
+      <div class="summary" style="margin-bottom:0">
+        <div class="summary-card player">
+          <div class="avatar"><svg class="icon"><use href="#i-user"/></svg></div>
+          <div class="player-info">
+            <div class="player-name">Player<span id="playerId">#7426</span></div>
+            <div class="player-level">
+              <svg class="icon icon-xs"><use href="#i-star"/></svg>
+              LEVEL <span id="level">1</span>
+            </div>
+            <div class="xp-bar"><span id="xpBar"></span></div>
+            <div class="xp-text"><span id="xpText">0 / 500 XP</span></div>
+          </div>
+        </div>
+        <div class="summary-card stat-mini">
+          <div class="label"><svg class="icon icon-xs"><use href="#i-coin"/></svg> SALDO PTS</div>
+          <div class="value" id="balance">500</div>
+          <div class="sub">Poin reward</div>
+        </div>
+        <div class="summary-card stat-mini">
+          <div class="label"><svg class="icon icon-xs"><use href="#i-gift"/></svg> TOTAL REWARD</div>
+          <div class="value reward" id="totalReward">0</div>
+          <div class="sub">per sesi: 100 PTS</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDENTITAS PROYEK -->
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-info"/></svg>
+        IDENTITAS PROYEK
+      </h2>
+      <p class="section-sub">Spesifikasi teknis MinePoint & token $MPE.</p>
+
+      <div class="project-table">
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-flag"/></svg> NAMA PROYEK</small>
+          <strong>MinePoint</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-coin"/></svg> TOKEN</small>
+          <strong class="mpe">$MPE</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-star"/></svg> POIN GAME</small>
+          <strong>PTS</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-telegram"/></svg> PLATFORM</small>
+          <strong>Telegram Mini App</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-code"/></svg> FRONTEND</small>
+          <strong>HTML · CSS · JS</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-code"/></svg> BACKEND</small>
+          <strong>Node.js</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-database"/></svg> DATABASE</small>
+          <strong>SQLite</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-ton"/></svg> BLOCKCHAIN</small>
+          <strong class="ton-amount">TON</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-diamond"/></svg> TOKEN STD</small>
+          <strong>Jetton</strong>
+        </div>
+        <div class="project-row">
+          <small><svg class="icon icon-xs"><use href="#i-target"/></svg> TARGET</small>
+          <strong>Android & Device Lain</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-roadmap"/></svg>
+        ROADMAP 6 FASE
+      </h2>
+      <p class="section-sub">Perjalanan MinePoint dari MVP sampai ekosistem global.</p>
+
+      <div class="roadmap-phase done">
+        <div class="roadmap-head">
+          <h4>Fase 1 — Fondasi (MVP)</h4>
+          <span class="roadmap-target">Q1 2026</span>
+        </div>
+        <p class="roadmap-desc">Prototipe HTML bisa diuji langsung di browser HP.</p>
+        <div class="roadmap-items">
+          <span class="roadmap-item"><svg class="icon"><use href="#i-pickaxe"/></svg> Mining</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-gift"/></svg> Daily</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-target"/></svg> Misi</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-wallet"/></svg> Wallet Demo</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-palette"/></svg> 6 Tema</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-code"/></svg> HTML/CSS/JS</span>
+        </div>
+      </div>
+
+      <div class="roadmap-phase future">
+        <div class="roadmap-head">
+          <h4>Fase 2 — Engagement</h4>
+          <span class="roadmap-target">Q2 2026</span>
+        </div>
+        <p class="roadmap-desc">Fitur retention: achievement, referral, PWA, multi-bahasa.</p>
+        <div class="roadmap-items">
+          <span class="roadmap-item"><svg class="icon"><use href="#i-trophy"/></svg> Achievement</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-user"/></svg> Referral</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-star"/></svg> PWA</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-stats"/></svg> Grafik</span>
+        </div>
+      </div>
+
+      <div class="roadmap-phase future">
+        <div class="roadmap-head">
+          <h4>Fase 3 — Telegram & Backend</h4>
+          <span class="roadmap-target">Q3 2026</span>
+        </div>
+        <p class="roadmap-desc">Migrasi ke Telegram Mini App + Node.js backend + SQLite.</p>
+        <div class="roadmap-items">
+          <span class="roadmap-item"><svg class="icon"><use href="#i-telegram"/></svg> Telegram Mini App</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-code"/></svg> Node.js API</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-database"/></svg> SQLite</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-user"/></svg> Telegram Auth</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-trophy"/></svg> Live Leaderboard</span>
+        </div>
+      </div>
+
+      <div class="roadmap-phase future">
+        <div class="roadmap-head">
+          <h4>Fase 4 — Token & Airdrop</h4>
+          <span class="roadmap-target">Q4 2026</span>
+        </div>
+        <p class="roadmap-desc">Launch $MPE Jetton di TON + distribusi airdrop ke pemain aktif.</p>
+        <div class="roadmap-items">
+          <span class="roadmap-item"><svg class="icon"><use href="#i-diamond"/></svg> Jetton Contract</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-gift"/></svg> Airdrop</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-swap"/></svg> PTS → $MPE</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-ton"/></svg> DEX Listing</span>
+        </div>
+      </div>
+
+      <div class="roadmap-phase future">
+        <div class="roadmap-head">
+          <h4>Fase 5 — Ekosistem</h4>
+          <span class="roadmap-target">Q1 2027</span>
+        </div>
+        <p class="roadmap-desc">NFT Marketplace, PvP Mining, Guild System, Premium Pass.</p>
+        <div class="roadmap-items">
+          <span class="roadmap-item"><svg class="icon"><use href="#i-diamond"/></svg> NFT Market</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-fire"/></svg> PvP Mining</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-user"/></svg> Guild System</span>
+        </div>
+      </div>
+
+      <div class="roadmap-phase future">
+        <div class="roadmap-head">
+          <h4>Fase 6 — Scale & Expansion</h4>
+          <span class="roadmap-target">Q2 2027+</span>
+        </div>
+        <p class="roadmap-desc">Global scale: 5 juta user, CEX listing, B2B solutions.</p>
+        <div class="roadmap-items">
+          <span class="roadmap-item"><svg class="icon"><use href="#i-rocket"/></svg> 5 Juta User</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-trophy"/></svg> CEX Listing</span>
+          <span class="roadmap-item"><svg class="icon"><use href="#i-flag"/></svg> Global Scale</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKIN & TEMA -->
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-palette"/></svg>
+        SKIN & TEMA
+      </h2>
+      <p class="section-sub">6 tema visual — 1 gratis (TON Default), 5 premium (beli pakai TON).</p>
+      <div class="skin-grid" id="skinGridSettings"></div>
+    </div>
+
+    <!-- TENTANG -->
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-info"/></svg>
+        TENTANG MINEPOINT
+      </h2>
+      <p class="section-sub">Prototipe aplikasi play-to-earn dengan ekosistem TON Blockchain.</p>
+      <ul class="info-list">
+        <li><b>Timer mining:</b> 12 jam per sesi</li>
+        <li><b>Reward mining:</b> 100 PTS setelah selesai</li>
+        <li><b>PTS</b> adalah poin reward — konversi $MPE di Fase 4</li>
+        <li><b>Pembelian</b> item Shop menggunakan TON</li>
+        <li><b>Frontend:</b> HTML · CSS · JavaScript</li>
+        <li><b>Backend:</b> Node.js + SQLite (Fase 3)</li>
+        <li><b>Platform:</b> Telegram Mini App (Fase 3)</li>
+        <li><b>Token:</b> $MPE Jetton di TON Blockchain</li>
+      </ul>
+    </div>
+
+    <!-- ZONA BAHAYA -->
+    <div class="card">
+      <h2 class="section-title">
+        <svg class="icon icon-sm"><use href="#i-warn"/></svg>
+        ZONA BAHAYA
+      </h2>
+      <p class="section-sub">Reset semua data demo. Tidak bisa dibatalkan.</p>
+      <button class="btn danger" id="resetBtn">
+        <svg class="icon icon-sm"><use href="#i-trash"/></svg>
+        Reset Data Demo
+      </button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    MINEPOINT V1 • $MPE
+    <div class="footer-line">
+      <span>Powered by</span>
+      <svg class="icon icon-xs" style="color:#33AAFF"><use href="#i-ton"/></svg>
+      <span>TON Blockchain</span>
+    </div>
+  </footer>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="active" data-page="mining">
+      <span class="nav-icon"><svg><use href="#i-pickaxe"/></svg></span>
+      <span class="nav-label">MINING</span>
+    </button>
+    <button data-page="missions">
+      <span class="nav-icon"><svg><use href="#i-target"/></svg></span>
+      <span class="nav-label">MISI</span>
+    </button>
+    <button data-page="wallet">
+      <span class="nav-icon"><svg><use href="#i-wallet"/></svg></span>
+      <span class="nav-label">WALLET</span>
+    </button>
+    <button data-page="shop">
+      <span class="nav-icon"><svg><use href="#i-cart"/></svg></span>
+      <span class="nav-label">SHOP</span>
+    </button>
+    <button data-page="settings">
+      <span class="nav-icon"><svg><use href="#i-settings"/></svg></span>
+      <span class="nav-label">SETTING</span>
+    </button>
+  </div>
+</nav>
+
+<div class="modal-back" id="modalBack">
+  <div class="modal">
+    <h3 id="modalTitle">Konfirmasi</h3>
+    <p id="modalText"></p>
+    <div class="modal-actions">
+      <button id="modalCancel">Batal</button>
+      <button class="btn-confirm" id="modalConfirm">Ya, Lanjut</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-back" id="spinBack">
+  <div class="modal">
+    <h3><svg class="icon icon-sm"><use href="#i-spin"/></svg> Lucky Spin</h3>
+    <div class="spin-wheel-wrap">
+      <div class="spin-result" id="spinResult">?</div>
+      <p id="spinText" style="margin-top:10px;color:var(--muted);font-size:12px">Tekan tombol di bawah untuk memutar roda</p>
+    </div>
+    <div class="modal-actions">
+      <button id="spinClose">Tutup</button>
+      <button class="btn-confirm" id="spinBtn">
+        <svg class="icon icon-xs"><use href="#i-spin"/></svg> Putar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  if (window.confirm("Halo! Ini hanya percobaan, bukan sesuatu yang asli atau serius. Apakah kamu ingin lanjut?")) {
+  }
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  const CONFIG = {
+    STORAGE_KEY: "minepoint_v2",
+    SESSION_MS: 12 * 60 * 60 * 1000,
+    REWARD: 100,
+    XP_PER_LEVEL: 500,
+    START_BALANCE: 500,
+    START_TON: 0.01,
+    DAILY_REWARDS: [20, 30, 40, 50, 75, 100, 150],
+    PTS_PER_TON: 50000000,
+    SPIN_COST_TON: 0.001,
+    SPIN_PRIZES: [
+      { amount: 0,   weight: 30, label: "Zonk — Coba Lagi" },
+      { amount: 25,  weight: 25, label: "+25 PTS" },
+      { amount: 50,  weight: 20, label: "+50 PTS" },
+      { amount: 75,  weight: 12, label: "+75 PTS" },
+      { amount: 100, weight: 8,  label: "+100 PTS" },
+      { amount: 150, weight: 4,  label: "+150 PTS" },
+      { amount: 250, weight: 1,  label: "JACKPOT +250 PTS" }
+    ],
+    THEMES: {
+      ton:     { id:"ton",     name:"TON Default",   icon:"i-ton",     desc:"Tema default biru TON — gratis untuk semua pemain.",      priceTon:0,    className:"theme-ton" },
+      galaxy:  { id:"galaxy",  name:"Neon Galaxy",   icon:"i-galaxy",  desc:"Ungu-biru neon futuristik dengan font sci-fi Orbitron.",  priceTon:0.05, className:"theme-galaxy" },
+      gold:    { id:"gold",    name:"Royal Gold",    icon:"i-royal",   desc:"Emas mewah dengan font serif Playfair Display.",          priceTon:0.15, className:"theme-gold" },
+      emerald: { id:"emerald", name:"Emerald Mine",  icon:"i-emerald", desc:"Hijau zamrud segar dengan font Rajdhani tegas.",          priceTon:0.20, className:"theme-emerald" },
+      crimson: { id:"crimson", name:"Crimson Shadow",icon:"i-crimson", desc:"Merah gelap elegan, kesan premium dan misterius.",        priceTon:0.25, className:"theme-crimson" }
+    },
+    SOCIAL_TASKS: {
+      taskTelegramChannel: { id:"taskTelegramChannel", name:"Join Channel Telegram", reward:150 },
+      taskTelegramGroup:   { id:"taskTelegramGroup",   name:"Join Grup Telegram",    reward:100 },
+      taskTiktok:          { id:"taskTiktok",          name:"Follow TikTok",         reward:75 },
+      taskYoutube:         { id:"taskYoutube",         name:"Subscribe YouTube",     reward:75 },
+      taskX:               { id:"taskX",               name:"Follow X (Twitter)",    reward:50 }
+    },
+    SHOP_ITEMS: {
+      speed:   { id:"speed",   icon:"i-bolt",    name:"Speed Boost",     desc:"Sesi mining berikutnya cuma 6 jam.",         priceTon:0.02, type:"consumable" },
+      mega:    { id:"mega",    icon:"i-diamond", name:"Mega Reward",     desc:"Sesi berikutnya reward +50 PTS.",             priceTon:0.03, type:"consumable" },
+      instant: { id:"instant", icon:"i-clock",   name:"Instant Finish",  desc:"Selesaikan sesi mining yang berjalan.",        priceTon:0.05, type:"consumable" },
+      streak:  { id:"streak",  icon:"i-shield",  name:"Streak Protector",desc:"Lindungi streak login meski 1 hari bolong.",  priceTon:0.04, type:"consumable" },
+      spin:    { id:"spin",    icon:"i-spin",    name:"Lucky Spin",      desc:"Putar roda — hadiah acak 0 s/d 250 PTS.",      priceTon:0.01, type:"minigame" }
+    }
+  };
+
+  const defaultState = {
+    balance: 500,
+    tonBalance: 0.01,
+    totalReward: 0, totalMining: 0,
+    xp: 0, level: 1, streak: 0,
+    mineStart: null, mineDuration: 12 * 60 * 60 * 1000,
+    buffs: { speed:false, mega:false, streakProtect:false },
+    theme: "ton", ownedThemes: ["ton"],
+    lastDailyClaim: null, dailyDayIndex: 0,
+    lastMissionReset: null,
+    missions: { mine:false, shop:false },
+    missionsClaimed: { mine:false, shop:false },
+    socialTasks: {},
+    socialTasksClaimed: {},
+    totalMissionsDone: 0,
+    tonConnected: false,
+    tonAddress: null
+  };
+
+  let state = loadState();
+  let lastRenderedBalance = state.balance;
+  let lastRenderedTon = state.tonBalance;
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(CONFIG.STORAGE_KEY);
+      if(!raw) return JSON.parse(JSON.stringify(defaultState));
+      const parsed = JSON.parse(raw);
+      const merged = Object.assign(JSON.parse(JSON.stringify(defaultState)), parsed);
+      merged.buffs = Object.assign({speed:false, mega:false, streakProtect:false}, parsed.buffs || {});
+      if(!Array.isArray(merged.ownedThemes)) merged.ownedThemes = ["ton"];
+      if(merged.ownedThemes.indexOf("ton") === -1) merged.ownedThemes.push("ton");
+      if(!merged.socialTasks) merged.socialTasks = {};
+      if(!merged.socialTasksClaimed) merged.socialTasksClaimed = {};
+      if(typeof merged.tonBalance !== "number") merged.tonBalance = 0.01;
+      // Migrasi tema lama ke ton
+      if(merged.theme === "classic" || merged.theme === "cyber" || merged.theme === null){
+        merged.theme = "ton";
+      }
+      return merged;
+    }catch(e){ return JSON.parse(JSON.stringify(defaultState)); }
+  }
+
+  function saveState(){
+    try{ localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(state)); }
+    catch(e){ toast("Gagal menyimpan data"); }
+  }
+
+  const $ = id => document.getElementById(id);
+  const $$ = sel => document.querySelectorAll(sel);
+  const pad = n => String(n).padStart(2,"0");
+  const formatNumber = n => new Intl.NumberFormat("id-ID").format(n);
+  const formatTon = n => n.toFixed(4);
+  const iconHtml = (id, cls) => '<svg class="icon ' + (cls||'') + '"><use href="#' + id + '"/></svg>';
+
+  function formatTime(ms){
+    if(ms < 0) ms = 0;
+    const totalSec = Math.floor(ms / 1000);
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    return pad(h) + ":" + pad(m) + ":" + pad(s);
+  }
+
+  function todayStr(){
+    const d = new Date();
+    return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate());
+  }
+
+  let toastTimer;
+  function toast(msg, duration){
+    duration = duration || 2200;
+    const el = $("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.classList.remove("show"); }, duration);
+  }
+
+  let modalCallback = null;
+  function showModal(title, text, onConfirm){
+    $("modalTitle").innerHTML = title;
+    $("modalText").textContent = text;
+    $("modalBack").classList.add("show");
+    modalCallback = onConfirm || null;
+  }
+  function hideModal(){
+    $("modalBack").classList.remove("show");
+    modalCallback = null;
+  }
+  $("modalCancel").onclick = hideModal;
+  $("modalBack").onclick = function(e){ if(e.target === $("modalBack")) hideModal(); };
+  $("modalConfirm").onclick = function(){
+    const cb = modalCallback;
+    hideModal();
+    if(cb) cb();
+  };
+
+  function showPage(page){
+    $$(".page").forEach(function(p){ p.classList.remove("active"); });
+    const el = $("page-" + page);
+    if(el) el.classList.add("active");
+    $$(".nav button").forEach(function(b){
+      b.classList.toggle("active", b.dataset.page === page);
+    });
+    if(page === "shop" && !state.missions.shop){
+      state.missions.shop = true;
+      saveState();
+      updateMissionsUI();
+    }
+    window.scrollTo({top:0, behavior:"smooth"});
+    updateAllBalances();
+  }
+
+  $$(".nav button").forEach(function(btn){
+    btn.onclick = function(){ showPage(btn.dataset.page); };
+  });
+  $$("[data-page]").forEach(function(btn){
+    btn.onclick = function(){ showPage(btn.dataset.page); };
+  });
+
+  function addXP(n){
+    state.xp += n;
+    let leveled = false;
+    while(state.xp >= CONFIG.XP_PER_LEVEL){
+      state.xp -= CONFIG.XP_PER_LEVEL;
+      state.level++;
+      leveled = true;
+    }
+    if(leveled) toast("Naik ke Level " + state.level + "!");
+  }
+
+  /* ============ MINING ============ */
+  function sessionDuration(){ return state.mineDuration || CONFIG.SESSION_MS; }
+  function isMining(){ return state.mineStart !== null && (Date.now() - state.mineStart) < sessionDuration(); }
+  function isReady(){ return state.mineStart !== null && (Date.now() - state.mineStart) >= sessionDuration(); }
+
+  function rewardAmount(){
+    let reward = CONFIG.REWARD;
+    if(state.buffs.mega) reward += 50;
+    return reward;
+  }
+
+  function setMegaIcon(iconId){ $("megaIcon").innerHTML = iconHtml(iconId); }
+
+  function startMining(silent){
+    if(isMining()) return;
+    let duration = CONFIG.SESSION_MS;
+    if(state.buffs.speed){
+      duration = 6 * 60 * 60 * 1000;
+      state.buffs.speed = false;
+    }
+    state.mineDuration = duration;
+    state.mineStart = Date.now();
+    state.totalMining++;
+    if(!state.missions.mine) state.missions.mine = true;
+    saveState();
+    updateMegaButton();
+    updateMissionsUI();
+    updateStatsUI();
+    updateShopUI();
+    updateAllBalances();
+    if(!silent){
+      if(duration < CONFIG.SESSION_MS) toast("Speed Boost aktif! Mining cuma 6 jam.");
+      else toast("Mining dimulai! Tunggu 12 jam.");
+    }
+  }
+
+  function claimReward(silent){
+    if(!isReady()) return;
+    const reward = rewardAmount();
+    const hadMega = state.buffs.mega;
+    state.mineStart = null;
+    state.mineDuration = CONFIG.SESSION_MS;
+    state.balance += reward;
+    state.totalReward += reward;
+    if(hadMega) state.buffs.mega = false;
+    addXP(50);
+    saveState();
+    updateMegaButton();
+    updateStatsUI();
+    updateProfileUI();
+    updateShopUI();
+    updateWalletUI();
+    updateAllBalances();
+    if(!silent){
+      toast((hadMega ? "Mega Reward! +" : "+") + reward + " PTS diklaim!", 2600);
+    }
+  }
+
+  $("megaBtn").onclick = function(){
+    if(isMining()) return;
+    if(isReady()) claimReward(false);
+    else startMining(false);
+  };
+
+  function updateMegaButton(){
+    const btn = $("megaBtn");
+    const title = $("megaTitle");
+    const sub = $("megaSub");
+    const timerLabel = $("megaTimerLabel");
+    const timer = $("megaTimer");
+    const pct = $("megaPct");
+    const progress = $("megaProgress");
+    const bottomStatus = $("megaBottomStatus");
+    const active = isMining();
+    const ready = isReady();
+    btn.classList.remove("state-ready", "state-mining", "state-claim");
+
+    if(!state.mineStart){
+      btn.classList.add("state-ready");
+      setMegaIcon("i-pickaxe");
+      title.textContent = "Mulai Farming";
+      sub.textContent = "Klik untuk mulai menambang";
+      timerLabel.textContent = "WAKTU FARMING";
+      timer.textContent = formatTime(sessionDuration());
+      pct.textContent = "0%";
+      progress.style.width = "0%";
+      bottomStatus.textContent = "Menunggu dimulai";
+    }else if(active){
+      const dur = sessionDuration();
+      const remaining = state.mineStart + dur - Date.now();
+      const p = Math.min(100, ((Date.now() - state.mineStart) / dur) * 100);
+      btn.classList.add("state-mining");
+      setMegaIcon("i-pickaxe");
+      title.textContent = "Mining Berjalan";
+      sub.textContent = "Sedang mining...";
+      timerLabel.textContent = "WAKTU TERSISA";
+      timer.textContent = formatTime(remaining);
+      pct.textContent = Math.floor(p) + "%";
+      progress.style.width = p + "%";
+      bottomStatus.textContent = "Mining sedang berjalan";
+    }else if(ready){
+      btn.classList.add("state-claim");
+      setMegaIcon("i-coin");
+      title.textContent = "Klaim " + rewardAmount() + " Points";
+      sub.textContent = "Mining selesai · reward siap";
+      timerLabel.textContent = "STATUS";
+      timer.textContent = "SELESAI";
+      pct.textContent = "100%";
+      progress.style.width = "100%";
+      bottomStatus.textContent = "Klik untuk klaim";
+    }
+    updateMegaBuffs();
+  }
+
+  function updateMegaBuffs(){
+    const wrap = $("megaBuffs");
+    const badges = [];
+    if(state.buffs.speed) badges.push({ic:"i-bolt", t:"Speed Boost"});
+    if(state.buffs.mega) badges.push({ic:"i-diamond", t:"Mega Reward +50"});
+    wrap.innerHTML = badges.map(function(b){
+      return '<span class="buff-badge">' + iconHtml(b.ic,"icon-xs") + ' ' + b.t + '</span>';
+    }).join("");
+  }
+
+  function updateProfileUI(){
+    const xpPct = Math.min(100, (state.xp / CONFIG.XP_PER_LEVEL) * 100);
+    $("xpBar").style.width = xpPct + "%";
+    $("xpText").textContent = state.xp + " / " + CONFIG.XP_PER_LEVEL + " XP";
+    $("level").textContent = state.level;
+  }
+
+  function updateStatsUI(){
+    const bal = $("balance");
+    const balStr = formatNumber(state.balance);
+    if(bal.textContent !== balStr){
+      bal.textContent = balStr;
+      if(state.balance > lastRenderedBalance){
+        bal.classList.remove("bump");
+        void bal.offsetWidth;
+        bal.classList.add("bump");
+        setTimeout(function(){ bal.classList.remove("bump"); }, 650);
+      }
+      lastRenderedBalance = state.balance;
+    }
+    $("totalReward").textContent = formatNumber(state.totalReward);
+  }
+
+  function updateAllBalances(){
+    const ptsStr = formatNumber(state.balance);
+    const tonStr = formatTon(state.tonBalance);
+    ["topPts","shopPts","walletPts"].forEach(function(id){
+      const el = $(id);
+      if(el) el.textContent = ptsStr + (id === "walletPts" ? " PTS" : "");
+    });
+    ["topTon","shopTon"].forEach(function(id){
+      const el = $(id);
+      if(el) el.textContent = tonStr;
+    });
+    const wb = $("walletBalance");
+    if(wb) wb.textContent = tonStr;
+    const wEst = $("walletEstimate");
+    if(wEst) wEst.textContent = ptsStr + " PTS";
+    if(state.tonBalance !== lastRenderedTon){ lastRenderedTon = state.tonBalance; }
+  }
+
+  function updateWalletUI(){
+    updateAllBalances();
+    const card = $("tonCard");
+    const btn = $("tonConnectBtn");
+    const badge = $("tonConnectedBadge");
+    const desc = $("tonDesc");
+
+    if(state.tonConnected){
+      card.classList.add("connected");
+      btn.classList.add("connected");
+      btn.innerHTML = iconHtml("i-check","icon-sm") + " TON Connected";
+      badge.style.display = "inline-flex";
+      const short = state.tonAddress ? state.tonAddress.slice(0,6) + "..." + state.tonAddress.slice(-4) : "UQ...xxxx";
+      desc.textContent = short;
+    }else{
+      card.classList.remove("connected");
+      btn.classList.remove("connected");
+      btn.innerHTML = iconHtml("i-link","icon-sm") + " Connect TON Wallet";
+      badge.style.display = "none";
+      desc.textContent = "Hubungkan wallet TON untuk pembelian item.";
+    }
+    $("walletPts").textContent = formatNumber(state.balance) + " PTS";
+    $("walletTotalReward").textContent = formatNumber(state.totalReward) + " PTS";
+  }
+
+  $("tonConnectBtn").onclick = function(){
+    if(state.tonConnected){
+      showModal(
+        iconHtml("i-link","icon-sm") + " Disconnect TON?",
+        "Wallet TON akan diputus dari aplikasi ini. Saldo tetap tersimpan.",
+        function(){
+          state.tonConnected = false;
+          state.tonAddress = null;
+          saveState();
+          updateWalletUI();
+          toast("TON Wallet diputus");
+        }
+      );
+      return;
+    }
+    state.tonConnected = true;
+    state.tonAddress = "UQ" + Math.random().toString(36).slice(2,10).toUpperCase() + Math.random().toString(36).slice(2,10).toUpperCase();
+    saveState();
+    updateWalletUI();
+    toast("TON Wallet terhubung (demo)");
+  };
+
+  $("convertBtn").onclick = function(){
+    toast("Konversi akan aktif di Fase 4 setelah Jetton $MPE dirilis");
+  };
+
+  /* ============ DAILY ============ */
+  function renderDaily(){
+    const grid = $("dailyGrid");
+    grid.innerHTML = "";
+    const today = todayStr();
+    const canClaim = state.lastDailyClaim !== today;
+    for(let i = 1; i <= 7; i++){
+      const div = document.createElement("div");
+      div.className = "day";
+      if(i <= state.dailyDayIndex) div.classList.add("claimed");
+      if(i === state.dailyDayIndex + 1 && canClaim) div.classList.add("today");
+      div.innerHTML = "Hari " + i + "<strong>+" + CONFIG.DAILY_REWARDS[i-1] + "</strong>";
+      grid.appendChild(div);
+    }
+    $("dailyBtn").disabled = !canClaim;
+    $("dailyBtn").textContent = canClaim ? "Klaim Reward Harian" : "Sudah diklaim hari ini";
+    $("dailyStreak").textContent = state.streak + " hari";
+  }
+
+  function claimDaily(){
+    const today = todayStr();
+    if(state.lastDailyClaim === today){ toast("Sudah klaim hari ini"); return; }
+    const day = Math.max(1, state.dailyDayIndex + 1);
+    const reward = CONFIG.DAILY_REWARDS[day - 1];
+    state.balance += reward;
+    state.totalReward += reward;
+    state.dailyDayIndex = Math.min(7, day);
+    state.lastDailyClaim = today;
+    state.streak++;
+    state.totalMissionsDone = (state.totalMissionsDone || 0) + 1;
+    addXP(25);
+    saveState();
+    updateStatsUI();
+    updateProfileUI();
+    renderDaily();
+    updateWalletUI();
+    updateAllBalances();
+    toast("Daily +" + reward + " PTS!");
+  }
+  $("dailyBtn").onclick = claimDaily;
+
+  /* ============ MISI ============ */
+  function checkMissionReset(){
+    const today = todayStr();
+    if(state.lastMissionReset !== today){
+      state.missions = { mine:false, shop:false };
+      state.missionsClaimed = { mine:false, shop:false };
+      state.lastMissionReset = today;
+      saveState();
+    }
+  }
+
+  function updateMissionsUI(){
+    $("mineMissionBtn").disabled = state.missionsClaimed.mine || !state.missions.mine;
+    $("shopMissionBtn").disabled = state.missionsClaimed.shop || !state.missions.shop;
+    $("mineMissionStatus").textContent = state.missions.mine ? "1/1 hari ini" : "0/1 hari ini";
+    $("shopMissionStatus").textContent = state.missions.shop ? "1/1 hari ini" : "0/1 hari ini";
+
+    Object.keys(CONFIG.SOCIAL_TASKS).forEach(function(taskId){
+      const claimed = !!state.socialTasksClaimed[taskId];
+      const opened = !!state.socialTasks[taskId];
+      const btn = $(taskId + "Btn");
+      const status = $(taskId + "Status");
+      const mission = $(taskId);
+      if(!btn) return;
+
+      if(claimed){
+        btn.disabled = true;
+        btn.textContent = "Selesai";
+        if(status) status.textContent = "✓ Sudah diklaim";
+        if(mission) mission.classList.add("done");
+      }else if(opened){
+        btn.disabled = false;
+        btn.textContent = "Klaim";
+        if(status) status.textContent = "Terverifikasi — klik Klaim";
+      }else{
+        btn.disabled = true;
+        btn.textContent = "Klaim";
+        if(status) status.textContent = "Belum diverifikasi";
+      }
+    });
+  }
+
+  function claimMission(type){
+    if(state.missionsClaimed[type]) return;
+    if(type === "mine" && !state.missions.mine){ toast("Mulai mining dulu"); return; }
+    if(type === "shop" && !state.missions.shop){ toast("Kunjungi Shop dulu"); return; }
+    let reward = 0, name = "";
+    if(type === "mine"){ reward = 50; name = "Mulai mining"; }
+    if(type === "shop"){ reward = 25; name = "Jelajahi Shop"; }
+    state.balance += reward;
+    state.totalReward += reward;
+    state.missionsClaimed[type] = true;
+    state.totalMissionsDone = (state.totalMissionsDone || 0) + 1;
+    addXP(15);
+    saveState();
+    updateStatsUI();
+    updateProfileUI();
+    updateMissionsUI();
+    updateWalletUI();
+    updateAllBalances();
+    toast("Misi " + name + " +" + reward + " PTS!");
+  }
+  $("mineMissionBtn").onclick = function(){ claimMission("mine"); };
+  $("shopMissionBtn").onclick = function(){ claimMission("shop"); };
+
+  $$(".btn-social").forEach(function(btn){
+    btn.onclick = function(){
+      const taskId = btn.dataset.task;
+      const url = btn.dataset.url;
+      const task = CONFIG.SOCIAL_TASKS[taskId];
+      if(!task) return;
+      if(state.socialTasksClaimed[taskId]){ toast("Sudah diklaim"); return; }
+      window.open(url, "_blank");
+      state.socialTasks[taskId] = true;
+      saveState();
+      updateMissionsUI();
+      toast("Klik 'Klaim' setelah selesai");
+    };
+  });
+
+  Object.keys(CONFIG.SOCIAL_TASKS).forEach(function(taskId){
+    const btn = $(taskId + "Btn");
+    if(!btn) return;
+    btn.onclick = function(){
+      const task = CONFIG.SOCIAL_TASKS[taskId];
+      if(!task) return;
+      if(state.socialTasksClaimed[taskId]){ toast("Sudah diklaim"); return; }
+      if(!state.socialTasks[taskId]){ toast("Klik 'Buka' dulu untuk verifikasi"); return; }
+      state.balance += task.reward;
+      state.totalReward += task.reward;
+      state.socialTasksClaimed[taskId] = true;
+      state.totalMissionsDone = (state.totalMissionsDone || 0) + 1;
+      addXP(20);
+      saveState();
+      updateStatsUI();
+      updateProfileUI();
+      updateMissionsUI();
+      updateWalletUI();
+      updateAllBalances();
+      toast(task.name + " +" + task.reward + " PTS!");
+    };
+  });
+
+  /* ============ THEME ============ */
+  function applyTheme(themeId){
+    document.body.classList.remove(
+      "theme-ton","theme-galaxy","theme-gold","theme-emerald","theme-crimson"
+    );
+    if(themeId && CONFIG.THEMES[themeId] && CONFIG.THEMES[themeId].className){
+      document.body.classList.add(CONFIG.THEMES[themeId].className);
+    }
+    state.theme = themeId;
+    saveState();
+    renderSkinPage();
+  }
+
+  function renderSkinPage(){
+    const order = ["ton","galaxy","gold","emerald","crimson"];
+    const grid = $("skinGridSettings");
+    if(!grid) return;
+    grid.innerHTML = "";
+    order.forEach(function(id){
+      const t = CONFIG.THEMES[id];
+      const owned = state.ownedThemes.indexOf(id) !== -1;
+      const active = state.theme === id;
+      const isFree = t.priceTon === 0;
+      const btn = document.createElement("button");
+      btn.className = "skin t-" + id;
+      if(active) btn.classList.add("active");
+      if(!owned) btn.classList.add("locked");
+      if(isFree) btn.classList.add("free-tag");
+
+      let priceLabel;
+      if(active) priceLabel = iconHtml("i-check","icon-xs") + " AKTIF";
+      else if(owned) priceLabel = "PILIH";
+      else if(isFree) priceLabel = "GRATIS";
+      else priceLabel = iconHtml("i-ton","icon-xs") + " " + t.priceTon.toFixed(2);
+
+      btn.innerHTML =
+        '<div class="skin-art">' + iconHtml(t.icon) + '</div>' +
+        '<div class="skin-info">' +
+          '<div class="skin-name">' + t.name + (isFree ? ' <span style="color:var(--green);font-size:10px">FREE</span>' : '') + '</div>' +
+          '<div class="skin-desc">' + t.desc + '</div>' +
+        '</div>' +
+        '<div class="skin-price">' + priceLabel + '</div>';
+      btn.onclick = function(){ handleSkinClick(id); };
+      grid.appendChild(btn);
+    });
+  }
+
+  function handleSkinClick(id){
+    const t = CONFIG.THEMES[id];
+    if(!t) return;
+    if(state.ownedThemes.indexOf(id) !== -1){
+      if(state.theme === id){ toast("Tema " + t.name + " sudah aktif"); return; }
+      applyTheme(id);
+      toast("Tema " + t.name + " diaktifkan");
+      return;
+    }
+    if(t.priceTon === 0){
+      state.ownedThemes.push(id);
+      applyTheme(id);
+      toast("Tema " + t.name + " aktif (gratis)");
+      return;
+    }
+    if(state.tonBalance < t.priceTon){
+      toast("Butuh " + t.priceTon.toFixed(2) + " TON untuk beli " + t.name);
+      return;
+    }
+    if(!state.tonConnected){
+      toast("Connect TON Wallet dulu di tab Wallet");
+      return;
+    }
+    showModal(
+      "Beli Tema " + t.name + "?",
+      t.desc + "\n\nHarga: " + t.priceTon.toFixed(2) + " TON\nSaldo: " + formatTon(state.tonBalance) + " TON",
+      function(){
+        state.tonBalance -= t.priceTon;
+        state.ownedThemes.push(id);
+        state.theme = id;
+        saveState();
+        applyTheme(id);
+        updateWalletUI();
+        updateAllBalances();
+        renderShop();
+        toast("Tema " + t.name + " dibeli!");
+      }
+    );
+  }
+
+  /* ============ SHOP ============ */
+  function renderShop(){
+    const grid = $("shopGrid");
+    grid.innerHTML = "";
+    const order = ["speed","mega","instant","streak","spin"];
+    order.forEach(function(id){
+      const item = CONFIG.SHOP_ITEMS[id];
+      if(!item) return;
+      const isConsumable = item.type === "consumable" || item.type === "minigame";
+      const div = document.createElement("div");
+      div.className = "shop-item";
+      if(isConsumable) div.classList.add("consumable-badge");
+      const priceLabel = "Beli " + iconHtml("i-arrow","icon-xs");
+      div.innerHTML =
+        '<span class="big">' + iconHtml(item.icon) + '</span>' +
+        '<h3>' + item.name + '</h3>' +
+        '<p>' + item.desc + '</p>' +
+        '<div class="shop-price">' +
+          '<span>' + iconHtml("i-ton","icon-xs") + ' ' + item.priceTon.toFixed(2) + ' TON</span>' +
+          '<span class="price-tag">' + priceLabel + '</span>' +
+        '</div>';
+      div.onclick = function(){ buyItem(id); };
+      grid.appendChild(div);
+    });
+    updateBuffPanel();
+  }
+
+  function updateBuffPanel(){
+    const panel = $("buffPanel");
+    const list = $("buffList");
+    const chips = [];
+    if(state.buffs.speed) chips.push({ic:"i-bolt", t:"Speed Boost (sesi berikutnya 6 jam)"});
+    if(state.buffs.mega) chips.push({ic:"i-diamond", t:"Mega Reward (sesi berikutnya +50 PTS)"});
+    if(state.buffs.streakProtect) chips.push({ic:"i-shield", t:"Streak Protector (1 hari aman)"});
+    if(chips.length === 0){ panel.style.display = "none"; return; }
+    panel.style.display = "block";
+    list.innerHTML = chips.map(function(c){
+      return '<span class="buff-chip">' + iconHtml(c.ic,"icon-xs") + ' ' + c.t + '</span>';
+    }).join("");
+  }
+
+  function buyItem(id){
+    const item = CONFIG.SHOP_ITEMS[id];
+    if(!item) return;
+    if(!state.tonConnected){
+      toast("Connect TON Wallet dulu di tab Wallet");
+      return;
+    }
+    if(state.tonBalance < item.priceTon){
+      toast("Saldo TON tidak cukup. Butuh " + item.priceTon.toFixed(2) + " TON");
+      return;
+    }
+    state.tonBalance -= item.priceTon;
+
+    switch(id){
+      case "speed":
+        if(state.buffs.speed){
+          state.tonBalance += item.priceTon;
+          toast("Speed Boost sudah aktif. TON dikembalikan.");
+          saveState(); updateWalletUI(); updateAllBalances(); return;
+        }
+        state.buffs.speed = true;
+        toast("Speed Boost aktif! Sesi berikutnya 6 jam.");
+        break;
+      case "mega":
+        if(state.buffs.mega){
+          state.tonBalance += item.priceTon;
+          toast("Mega Reward sudah aktif. TON dikembalikan.");
+          saveState(); updateWalletUI(); updateAllBalances(); return;
+        }
+        state.buffs.mega = true;
+        toast("Mega Reward aktif! Sesi berikutnya +50 PTS.");
+        break;
+      case "instant":
+        if(!state.mineStart){
+          state.tonBalance += item.priceTon;
+          toast("Tidak ada sesi aktif. TON dikembalikan.");
+          saveState(); updateWalletUI(); updateAllBalances(); return;
+        }
+        {
+          const reward = rewardAmount();
+          state.mineStart = null;
+          state.mineDuration = CONFIG.SESSION_MS;
+          state.balance += reward;
+          state.totalReward += reward;
+          if(state.buffs.mega) state.buffs.mega = false;
+          addXP(50);
+          toast("Instant Finish! +" + reward + " PTS", 2600);
+        }
+        break;
+      case "streak":
+        if(state.buffs.streakProtect){
+          state.tonBalance += item.priceTon;
+          toast("Streak Protector sudah aktif. TON dikembalikan.");
+          saveState(); updateWalletUI(); updateAllBalances(); return;
+        }
+        state.buffs.streakProtect = true;
+        toast("Streak Protector aktif! Streak aman 1 hari.");
+        break;
+      case "spin":
+        saveState(); updateWalletUI(); updateAllBalances(); showSpinModal(); return;
+    }
+    saveState();
+    updateWalletUI();
+    updateAllBalances();
+    updateMegaButton();
+    updateShopUI();
+    updateProfileUI();
+    updateStatsUI();
+  }
+
+  function updateShopUI(){ renderShop(); }
+
+  /* ============ SPIN ============ */
+  let spinRolling = false;
+  function showSpinModal(){
+    $("spinResult").textContent = "?";
+    $("spinResult").classList.remove("rolling");
+    $("spinText").textContent = "Tekan tombol Putar untuk memutar roda";
+    $("spinBtn").disabled = false;
+    $("spinBtn").innerHTML = iconHtml("i-spin","icon-xs") + " Putar";
+    $("spinBack").classList.add("show");
+  }
+  $("spinClose").onclick = function(){ if(spinRolling) return; $("spinBack").classList.remove("show"); };
+
+  function pickPrize(){
+    const total = CONFIG.SPIN_PRIZES.reduce(function(sum,p){ return sum + p.weight; },0);
+    let r = Math.random() * total;
+    for(let i=0;i<CONFIG.SPIN_PRIZES.length;i++){
+      r -= CONFIG.SPIN_PRIZES[i].weight;
+      if(r <= 0) return CONFIG.SPIN_PRIZES[i];
+    }
+    return CONFIG.SPIN_PRIZES[0];
+  }
+
+  $("spinBtn").onclick = function(){
+    if(spinRolling) return;
+    spinRolling = true;
+    $("spinBtn").disabled = true;
+    $("spinBtn").textContent = "Memutar...";
+    $("spinResult").classList.add("rolling");
+    let ticks = 0;
+    const interval = setInterval(function(){
+      const temp = CONFIG.SPIN_PRIZES[Math.floor(Math.random()*CONFIG.SPIN_PRIZES.length)];
+      $("spinResult").textContent = temp.amount === 0 ? "?" : "+" + temp.amount;
+      ticks++;
+      if(ticks >= 20){
+        clearInterval(interval);
+        const prize = pickPrize();
+        $("spinResult").classList.remove("rolling");
+        $("spinResult").textContent = prize.amount === 0 ? "?" : "+" + prize.amount;
+        $("spinText").textContent = prize.label;
+        if(prize.amount > 0){
+          state.balance += prize.amount;
+          state.totalReward += prize.amount;
+          addXP(10);
+          saveState();
+          updateStatsUI();
+          updateProfileUI();
+          updateWalletUI();
+          updateAllBalances();
+          toast("Spin menang " + prize.amount + " PTS!");
+        }else{
+          toast("Zonk! Coba lagi.");
+        }
+        spinRolling = false;
+        $("spinBtn").disabled = false;
+        $("spinBtn").innerHTML = iconHtml("i-spin","icon-xs") + " Putar Lagi";
+      }
+    },80);
+  };
+
+  function checkStreakProtector(){
+    const today = todayStr();
+    if(state.lastDailyClaim === today) return;
+    const last = state.lastDailyClaim;
+    if(!last) return;
+    const lastDate = new Date(last + "T00:00:00");
+    const todayDate = new Date(today + "T00:00:00");
+    const diffDays = Math.round((todayDate - lastDate) / (24 * 60 * 60 * 1000));
+    if(diffDays >= 2 && state.buffs.streakProtect){
+      state.buffs.streakProtect = false;
+      toast("Streak Protector menyelamatkan streak-mu!");
+      saveState();
+    }else if(diffDays >= 2 && !state.buffs.streakProtect){
+      state.dailyDayIndex = 0;
+      state.streak = 0;
+      saveState();
+    }
+  }
+
+  $("resetBtn").onclick = function(){
+    showModal(
+      iconHtml("i-trash","icon-sm") + " Reset Data Demo?",
+      "Semua saldo, tema, dan progres akan dihapus. Tidak bisa dibatalkan.",
+      function(){
+        localStorage.removeItem(CONFIG.STORAGE_KEY);
+        state = JSON.parse(JSON.stringify(defaultState));
+        lastRenderedBalance = state.balance;
+        lastRenderedTon = state.tonBalance;
+        applyTheme("ton");
+        checkMissionReset();
+        saveState();
+        refreshAll();
+        toast("Data demo direset");
+      }
+    );
+  };
+
+  function refreshAll(){
+    updateProfileUI();
+    updateStatsUI();
+    updateMegaButton();
+    renderDaily();
+    updateMissionsUI();
+    updateShopUI();
+    renderSkinPage();
+    updateWalletUI();
+    updateAllBalances();
+  }
+
+  function init(){
+    checkMissionReset();
+    checkStreakProtector();
+    applyTheme(state.theme);
+    refreshAll();
+    setInterval(function(){
+      if(state.mineStart !== null){
+        updateMegaButton();
+      }
+    },1000);
+  }
+
+  init();
+
+})();
+</script>
+
+</body>
+</html>
